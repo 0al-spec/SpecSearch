@@ -90,8 +90,17 @@ def relevance_metrics(package_ids, relevance):
 def evaluate(service, path, split):
     data = read_queries(path)
     calibration = service.threshold
+    index = service.store.status()
     if calibration and calibration.get("queries_digest") != digest(data):
         raise ValueError("calibration_query_set_drift")
+    if calibration and (
+        calibration.get("provider_digest") != digest(index.get("provider"))
+        or calibration.get("corpus_digest") != index.get("corpus_digest")
+        or calibration.get("split") != "dev"
+        or not isinstance(calibration.get("value"), (int, float))
+        or not math.isfinite(calibration["value"])
+    ):
+        raise ValueError("calibration_index_drift_or_invalid_threshold")
     observations = []
     for row in data["queries"]:
         if row["split"] != split:
@@ -102,6 +111,8 @@ def evaluate(service, path, split):
                     query=row["query"], mode=mode, top_k=5, filters=Filters(source="candidates")
                 )
             )
+            if response["snapshot"] != index["snapshot"]:
+                raise ValueError("evaluation_snapshot_drift")
             ids = [r["package_id"] for r in response["results"]]
             recall, ndcg = relevance_metrics(ids, row["relevance"])
             strong = any(
@@ -111,6 +122,10 @@ def evaluate(service, path, split):
             observations.append(
                 {
                     "query_id": row["id"],
+                    "query": row["query"],
+                    "exact_lookup": row.get("kind") == "exact"
+                    or row["query"] in row["relevance"]
+                    or response["mode"] == "exact",
                     "language": row["language"],
                     "mode": mode,
                     "effective_mode": response["mode"],
@@ -130,7 +145,9 @@ def evaluate(service, path, split):
             rows = [
                 o
                 for o in observations
-                if o["mode"] == mode and (language == "all" or o["language"] == language)
+                if o["mode"] == mode
+                and (language == "all" or o["language"] == language)
+                and not o["exact_lookup"]
             ]
             pos, neg = [r for r in rows if not r["negative"]], [r for r in rows if r["negative"]]
             metrics[mode][language] = {
@@ -154,17 +171,33 @@ def evaluate(service, path, split):
         and hybrid[lang]["negative_strong_rate"] <= 0.10
         for lang in ("ru", "en")
     )
-    targets_met &= hybrid["all"]["ndcg5"] >= metrics["lexical"]["all"]["ndcg5"]
+    targets_met &= (
+        hybrid["all"]["ndcg5"] is not None
+        and metrics["lexical"]["all"]["ndcg5"] is not None
+        and hybrid["all"]["ndcg5"] >= metrics["lexical"]["all"]["ndcg5"]
+    )
     targets_met &= not any(o["degraded"] for o in observations)
+    if service.store.status()["snapshot"] != index["snapshot"]:
+        raise ValueError("evaluation_snapshot_drift")
+    exact = {}
+    for observation in observations:
+        if observation["exact_lookup"]:
+            exact.setdefault((observation["query"], observation["mode"]), observation)
     return {
         "at": now(),
         "split": split,
         "labels_status": data["labels_status"],
         "queries_digest": digest(data),
-        "index": service.store.status(),
+        "index": index,
         "calibration": calibration,
         "metrics": metrics,
         "observations": observations,
+        "exact_lookup": {
+            "language": "neutral",
+            "unique_queries": len({query for query, mode in exact}),
+            "observations": list(exact.values()),
+            "included_in_language_metrics": False,
+        },
         "targets_met_on_current_labels": bool(targets_met),
         "quality_accepted": bool(
             targets_met and data["labels_status"] == "confirmed" and split == "test"

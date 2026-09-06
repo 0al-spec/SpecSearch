@@ -104,8 +104,6 @@ def local_package(root: Path, source_id: str) -> Package:
     with tempfile.TemporaryDirectory() as temp:
         snapshot = Path(temp)
         for name, content in contents.items():
-            if name.endswith((".yaml", ".yml")):
-                load_yaml(content)
             target = snapshot / name
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes(content)
@@ -247,7 +245,6 @@ def registry_package(client, base, source_id, pid, version, status):
                 "package_id",
                 "name",
                 "summary",
-                "provided_capabilities",
                 "provided_intents",
                 "required_capabilities",
                 "compatibility",
@@ -256,6 +253,16 @@ def registry_package(client, base, source_id, pid, version, status):
         },
         "package",
     )
+    documents = [Document(id=rid + ":metadata", fields=doc_fields)]
+    context = fields(item.get("required_capabilities", []), "package.required_capabilities")
+    context += fields(item.get("compatibility"), "package.compatibility")
+    for i, capability in enumerate(item.get("provided_capabilities", [])):
+        documents.append(
+            Document(
+                id=f"{rid}:cap:{i}",
+                fields=fields(capability, f"package.provided_capabilities[{i}]") + context,
+            )
+        )
     state = item["state"]
     if not isinstance(state, dict):
         raise ImportFailure("invalid_lifecycle")
@@ -278,7 +285,7 @@ def registry_package(client, base, source_id, pid, version, status):
         yanked=state["yanked"],
         deprecated=state["deprecated"],
         observed_at=now(),
-        documents=[Document(id=rid + ":metadata", fields=doc_fields)],
+        documents=documents,
         details={"metadata": item},
         provenance={
             "status_digest": digest(status),
@@ -317,16 +324,33 @@ def import_sources(sources: list[dict], client=None):
                     catalog = registry_json(client, base, "/v0/packages")
                     for item in catalog["packages"]:
                         for version in item["versions"]:
-                            packages.append(
-                                registry_package(
-                                    client,
-                                    base,
-                                    source["id"],
-                                    item["package_id"],
-                                    version["version"],
-                                    status,
+                            try:
+                                packages.append(
+                                    registry_package(
+                                        client,
+                                        base,
+                                        source["id"],
+                                        item["package_id"],
+                                        version["version"],
+                                        status,
+                                    )
                                 )
-                            )
+                            except (
+                                ValueError,
+                                OSError,
+                                KeyError,
+                                TypeError,
+                                httpx.HTTPError,
+                            ) as exc:
+                                errors.append(
+                                    {
+                                        "source_id": source["id"],
+                                        "package_id": item["package_id"],
+                                        "version": version["version"],
+                                        "error": type(exc).__name__,
+                                        "detail": str(exc)[:300],
+                                    }
+                                )
                 else:
                     raise ImportFailure("unknown_source_kind")
             except (ValueError, OSError, KeyError, TypeError, httpx.HTTPError) as exc:

@@ -1,0 +1,1669 @@
+{
+  "at": "2026-09-06T18:44:22.446807+00:00",
+  "split": "test",
+  "labels_status": "provisional",
+  "queries_digest": "e9dfbea25640e01fd55cbd80dd32908f31890a772d2c26a74795bb4d2f35e16e",
+  "index": {
+    "snapshot": "42d9956e0ce845df904c87a8f1eb039c",
+    "created_at": "2026-09-06T15:44:30.958658+00:00",
+    "packages": 89,
+    "documents": 279,
+    "provider": {
+      "kind": "ollama",
+      "model": "nomic-embed-text:latest",
+      "artifact": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
+      "dimension": 768,
+      "preprocessing": "nomic-prefix-utf8-1024-mean/v1"
+    },
+    "corpus_digest": "279cf935b99c8966651fa6297f45442cea4037b3ea40772a05544e4382d3772e"
+  },
+  "calibration": {
+    "value": 0.6129892872406005,
+    "split": "dev",
+    "labels_status": "provisional",
+    "queries_digest": "e9dfbea25640e01fd55cbd80dd32908f31890a772d2c26a74795bb4d2f35e16e",
+    "provider_digest": "e5f357972b33a3189065a5f68bfbdde168e00ce60c5a337d4a9ae058cc2cef2e",
+    "corpus_digest": "279cf935b99c8966651fa6297f45442cea4037b3ea40772a05544e4382d3772e",
+    "at": "2026-09-06T15:44:55.440143+00:00",
+    "dev_positive_strong_correct_rate": 0.7,
+    "dev_negative_strong_rate": 0.0,
+    "observations": [
+      {
+        "query_id": "q00-ru",
+        "negative": false,
+        "score": 0.5502296090126038,
+        "correct": false
+      },
+      {
+        "query_id": "q00-en",
+        "negative": false,
+        "score": 0.6999248266220093,
+        "correct": true
+      },
+      {
+        "query_id": "q01-ru",
+        "negative": false,
+        "score": 0.5335168242454529,
+        "correct": false
+      },
+      {
+        "query_id": "q01-en",
+        "negative": false,
+        "score": 0.7195512652397156,
+        "correct": true
+      },
+      {
+        "query_id": "q02-ru",
+        "negative": false,
+        "score": 0.6497914791107178,
+        "correct": true
+      },
+      {
+        "query_id": "q02-en",
+        "negative": false,
+        "score": 0.7465423941612244,
+        "correct": true
+      },
+      {
+        "query_id": "q03-ru",
+        "negative": false,
+        "score": 0.6130793690681458,
+        "correct": true
+      },
+      {
+        "query_id": "q03-en",
+        "negative": false,
+        "score": 0.7866885662078857,
+        "correct": true
+      },
+      {
+        "query_id": "q04-ru",
+        "negative": false,
+        "score": 0.4941674768924713,
+        "correct": false
+      },
+      {
+        "query_id": "q04-en",
+        "negative": false,
+        "score": 0.7083110213279724,
+        "correct": true
+      },
+      {
+        "query_id": "q12-ru",
+        "negative": false,
+        "score": null,
+        "correct": true
+      },
+      {
+        "query_id": "q12-en",
+        "negative": false,
+        "score": null,
+        "correct": true
+      },
+      {
+        "query_id": "q14-ru",
+        "negative": false,
+        "score": null,
+        "correct": true
+      },
+      {
+        "query_id": "q14-en",
+        "negative": false,
+        "score": null,
+        "correct": true
+      },
+      {
+        "query_id": "q15-ru",
+        "negative": true,
+        "score": 0.5216595530509949,
+        "correct": false
+      },
+      {
+        "query_id": "q15-en",
+        "negative": true,
+        "score": 0.6129891872406006,
+        "correct": false
+      },
+      {
+        "query_id": "q16-ru",
+        "negative": true,
+        "score": 0.5313649773597717,
+        "correct": false
+      },
+      {
+        "query_id": "q16-en",
+        "negative": true,
+        "score": 0.5724741220474243,
+        "correct": false
+      }
+    ]
+  },
+  "metrics": {
+    "lexical": {
+      "ru": {
+        "positive_queries": 5,
+        "negative_queries": 3,
+        "recall5": 1.0,
+        "ndcg5": 0.8773705614469083,
+        "negative_strong_rate": null,
+        "p95_ms": 31.739027291769144
+      },
+      "en": {
+        "positive_queries": 5,
+        "negative_queries": 3,
+        "recall5": 1.0,
+        "ndcg5": 1.0,
+        "negative_strong_rate": null,
+        "p95_ms": 15.079648263053969
+      },
+      "all": {
+        "positive_queries": 10,
+        "negative_queries": 6,
+        "recall5": 1.0,
+        "ndcg5": 0.9386852807234541,
+        "negative_strong_rate": null,
+        "p95_ms": 22.32763576466823
+      }
+    },
+    "vector": {
+      "ru": {
+        "positive_queries": 5,
+        "negative_queries": 3,
+        "recall5": 0.8,
+        "ndcg5": 0.7,
+        "negative_strong_rate": 0.0,
+        "p95_ms": 433.8237353949804
+      },
+      "en": {
+        "positive_queries": 5,
+        "negative_queries": 3,
+        "recall5": 1.0,
+        "ndcg5": 1.0,
+        "negative_strong_rate": 0.0,
+        "p95_ms": 47.14990231295814
+      },
+      "all": {
+        "positive_queries": 10,
+        "negative_queries": 6,
+        "recall5": 0.9,
+        "ndcg5": 0.85,
+        "negative_strong_rate": 0.0,
+        "p95_ms": 203.02838500356302
+      }
+    },
+    "hybrid": {
+      "ru": {
+        "positive_queries": 5,
+        "negative_queries": 3,
+        "recall5": 1.0,
+        "ndcg5": 0.9261859507142916,
+        "negative_strong_rate": 0.0,
+        "p95_ms": 60.46037520427489
+      },
+      "en": {
+        "positive_queries": 5,
+        "negative_queries": 3,
+        "recall5": 1.0,
+        "ndcg5": 1.0,
+        "negative_strong_rate": 0.0,
+        "p95_ms": 46.825235192955006
+      },
+      "all": {
+        "positive_queries": 10,
+        "negative_queries": 6,
+        "recall5": 1.0,
+        "ndcg5": 0.9630929753571458,
+        "negative_strong_rate": 0.0,
+        "p95_ms": 54.051708000770304
+      }
+    }
+  },
+  "observations": [
+    {
+      "query_id": "q05-ru",
+      "query": "Переписать shell команду в компактный вывод",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": false,
+      "packages": [
+        "rtk.shell_output_proxy",
+        "n8n_io_n8n.computer_use",
+        "n8n.platform"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 43.44566699001007,
+      "degraded": false
+    },
+    {
+      "query_id": "q05-ru",
+      "query": "Переписать shell команду в компактный вывод",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": false,
+      "packages": [
+        "openai_codex.workspace",
+        "n8n_io_n8n.imap",
+        "rtk.shell_output_proxy",
+        "n8n_io_n8n.tournament",
+        "n8n_io_n8n.mcp_browser"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 0.5,
+      "negative_strong": null,
+      "latency_ms": 635.7696669874713,
+      "degraded": false
+    },
+    {
+      "query_id": "q05-ru",
+      "query": "Переписать shell команду в компактный вывод",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": false,
+      "packages": [
+        "rtk.shell_output_proxy",
+        "n8n.platform",
+        "openai_codex.workspace",
+        "n8n_io_n8n.imap",
+        "n8n_io_n8n.computer_use"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 66.06795900734141,
+      "degraded": false
+    },
+    {
+      "query_id": "q05-en",
+      "query": "Rewrite shell commands for compact output",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": false,
+      "packages": [
+        "rtk.shell_output_proxy",
+        "n8n_io_n8n.tournament",
+        "n8n.platform",
+        "n8n_io_n8n.computer_use",
+        "openai.codex"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 14.692166994791478,
+      "degraded": false
+    },
+    {
+      "query_id": "q05-en",
+      "query": "Rewrite shell commands for compact output",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": false,
+      "packages": [
+        "rtk.shell_output_proxy",
+        "n8n_io_n8n.codemirror_lang",
+        "n8n_io_n8n.chat_hub",
+        "n8n_io_n8n.tournament",
+        "n8n_io_n8n.codemirror_lang_sql"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 50.54229201050475,
+      "degraded": false
+    },
+    {
+      "query_id": "q05-en",
+      "query": "Rewrite shell commands for compact output",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": false,
+      "packages": [
+        "rtk.shell_output_proxy",
+        "n8n_io_n8n.tournament",
+        "openai.codex",
+        "n8n_io_n8n.composables",
+        "n8n_io_n8n.decorators"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 48.99495799327269,
+      "degraded": false
+    },
+    {
+      "query_id": "q06-ru",
+      "query": "Встроить coding agent через TypeScript SDK",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": false,
+      "packages": [
+        "openai.codex",
+        "openai_codex.codex",
+        "openai_codex.codex_sdk",
+        "n8n_io_n8n.workflow_sdk",
+        "n8n_io_n8n.agents"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 9.99812499503605,
+      "degraded": false
+    },
+    {
+      "query_id": "q06-ru",
+      "query": "Встроить coding agent через TypeScript SDK",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": false,
+      "packages": [
+        "openai.codex",
+        "n8n_io_n8n.agents",
+        "openai_codex.codex_sdk",
+        "rtk_ai_rtk.core",
+        "n8n_io_n8n.workflow_sdk"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 40.660667000338435,
+      "degraded": false
+    },
+    {
+      "query_id": "q06-ru",
+      "query": "Встроить coding agent через TypeScript SDK",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": false,
+      "packages": [
+        "openai.codex",
+        "openai_codex.codex_sdk",
+        "n8n_io_n8n.agents",
+        "n8n_io_n8n.workflow_sdk",
+        "openai_codex.codex"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 50.046290998579934,
+      "degraded": false
+    },
+    {
+      "query_id": "q06-en",
+      "query": "Embed a coding agent through a TypeScript SDK",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": false,
+      "packages": [
+        "openai.codex",
+        "openai_codex.codex",
+        "openai_codex.codex_sdk",
+        "n8n_io_n8n.workflow_sdk",
+        "n8n_io_n8n.agents"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 10.09708401397802,
+      "degraded": false
+    },
+    {
+      "query_id": "q06-en",
+      "query": "Embed a coding agent through a TypeScript SDK",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": false,
+      "packages": [
+        "openai.codex",
+        "openai_codex.codex_sdk",
+        "n8n_io_n8n.agents",
+        "rtk.shell_output_proxy",
+        "n8n_io_n8n.workflow_sdk"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 40.560875000664964,
+      "degraded": false
+    },
+    {
+      "query_id": "q06-en",
+      "query": "Embed a coding agent through a TypeScript SDK",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": false,
+      "packages": [
+        "openai.codex",
+        "openai_codex.codex_sdk",
+        "n8n_io_n8n.agents",
+        "openai_codex.codex",
+        "n8n_io_n8n.workflow_sdk"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 42.451542016351596,
+      "degraded": false
+    },
+    {
+      "query_id": "q07-ru",
+      "query": "Отменять HTTP запросы и настраивать таймауты",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": false,
+      "packages": [
+        "axios.http_client",
+        "axios_axios.axios",
+        "n8n.platform",
+        "bitcoin.core.fullnode"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 8.922083012294024,
+      "degraded": false
+    },
+    {
+      "query_id": "q07-ru",
+      "query": "Отменять HTTP запросы и настраивать таймауты",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": false,
+      "packages": [
+        "axios.http_client",
+        "openai.codex",
+        "n8n_io_n8n.codemirror_lang_html",
+        "axios_axios.axios",
+        "rtk.shell_output_proxy"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 43.282458995236084,
+      "degraded": false
+    },
+    {
+      "query_id": "q07-ru",
+      "query": "Отменять HTTP запросы и настраивать таймауты",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": false,
+      "packages": [
+        "axios.http_client",
+        "axios_axios.axios",
+        "n8n.platform",
+        "openai.codex",
+        "n8n_io_n8n.codemirror_lang_html"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 40.14954101876356,
+      "degraded": false
+    },
+    {
+      "query_id": "q07-en",
+      "query": "Cancel HTTP requests and configure timeouts",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": false,
+      "packages": [
+        "axios.http_client",
+        "n8n.platform",
+        "bitcoin.core.fullnode",
+        "axios_axios.axios",
+        "rtk.shell_output_proxy"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 10.376749996794388,
+      "degraded": false
+    },
+    {
+      "query_id": "q07-en",
+      "query": "Cancel HTTP requests and configure timeouts",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": false,
+      "packages": [
+        "axios.http_client",
+        "rtk.shell_output_proxy",
+        "n8n.platform",
+        "openai.codex",
+        "n8n_io_n8n.config"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 33.81062499829568,
+      "degraded": false
+    },
+    {
+      "query_id": "q07-en",
+      "query": "Cancel HTTP requests and configure timeouts",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": false,
+      "packages": [
+        "axios.http_client",
+        "n8n.platform",
+        "rtk.shell_output_proxy",
+        "openai.codex",
+        "n8n_io_n8n.cli"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 42.02787499525584,
+      "degraded": false
+    },
+    {
+      "query_id": "q08-ru",
+      "query": "Управлять кошельком узла через RPC",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": false,
+      "packages": [
+        "bitcoin.core.fullnode",
+        "openai.codex"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 7.230249990243465,
+      "degraded": false
+    },
+    {
+      "query_id": "q08-ru",
+      "query": "Управлять кошельком узла через RPC",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": false,
+      "packages": [
+        "rtk_ai_rtk.core",
+        "openai.codex",
+        "n8n_io_n8n.tournament",
+        "openai_codex.workspace",
+        "n8n_io_n8n.crdt"
+      ],
+      "recall5": 0.0,
+      "ndcg5": 0.0,
+      "negative_strong": null,
+      "latency_ms": 35.357916000066325,
+      "degraded": false
+    },
+    {
+      "query_id": "q08-ru",
+      "query": "Управлять кошельком узла через RPC",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": false,
+      "packages": [
+        "openai.codex",
+        "bitcoin.core.fullnode",
+        "rtk_ai_rtk.core",
+        "n8n_io_n8n.tournament",
+        "openai_codex.workspace"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 0.6309297535714574,
+      "negative_strong": null,
+      "latency_ms": 40.14329198980704,
+      "degraded": false
+    },
+    {
+      "query_id": "q08-en",
+      "query": "Manage a node wallet through RPC",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": false,
+      "packages": [
+        "bitcoin.core.fullnode",
+        "openai.codex",
+        "n8n_io_n8n.cli",
+        "axios.http_client",
+        "n8n.platform"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 11.073874979047105,
+      "degraded": false
+    },
+    {
+      "query_id": "q08-en",
+      "query": "Manage a node wallet through RPC",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": false,
+      "packages": [
+        "bitcoin.core.fullnode",
+        "n8n_io_n8n.n8n_nodes_base",
+        "n8n_io_n8n.create_node",
+        "n8n_io_n8n.node_cli",
+        "n8n_io_n8n.ai_node_sdk"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 36.73791702021845,
+      "degraded": false
+    },
+    {
+      "query_id": "q08-en",
+      "query": "Manage a node wallet through RPC",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": false,
+      "packages": [
+        "bitcoin.core.fullnode",
+        "openai.codex",
+        "n8n_io_n8n.create_node",
+        "n8n_io_n8n.node_cli",
+        "n8n_io_n8n.ai_node_sdk"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 41.561624995665625,
+      "degraded": false
+    },
+    {
+      "query_id": "q09-ru",
+      "query": "Настроить AI инструменты платформы автоматизации",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": false,
+      "packages": [
+        "n8n_io_n8n.ai_utilities",
+        "n8n_io_n8n.ai_node_sdk",
+        "n8n_io_n8n.instance_ai",
+        "n8n_io_n8n.ai_workflow_builder",
+        "n8n.platform"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 0.38685280723454163,
+      "negative_strong": null,
+      "latency_ms": 7.9923750017769635,
+      "degraded": false
+    },
+    {
+      "query_id": "q09-ru",
+      "query": "Настроить AI инструменты платформы автоматизации",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": false,
+      "packages": [
+        "n8n.platform",
+        "n8n_io_n8n.computer_use",
+        "rtk_ai_rtk.core",
+        "n8n_io_n8n.agents",
+        "n8n_io_n8n.instance_ai"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 41.763167013414204,
+      "degraded": false
+    },
+    {
+      "query_id": "q09-ru",
+      "query": "Настроить AI инструменты платформы автоматизации",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": false,
+      "packages": [
+        "n8n.platform",
+        "n8n_io_n8n.instance_ai",
+        "n8n_io_n8n.ai_utilities",
+        "n8n_io_n8n.computer_use",
+        "rtk_ai_rtk.core"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 40.52075001527555,
+      "degraded": false
+    },
+    {
+      "query_id": "q09-en",
+      "query": "Configure AI tools for a workflow platform",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": false,
+      "packages": [
+        "n8n.platform",
+        "n8n_io_n8n.ai_workflow_builder",
+        "rtk.shell_output_proxy",
+        "n8n_io_n8n.n8n_workflow",
+        "n8n_io_n8n.workflow_sdk"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 15.288292022887617,
+      "degraded": false
+    },
+    {
+      "query_id": "q09-en",
+      "query": "Configure AI tools for a workflow platform",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": false,
+      "packages": [
+        "n8n.platform",
+        "n8n_io_n8n.ai_workflow_builder",
+        "n8n_io_n8n.n8n",
+        "openai.codex",
+        "n8n_io_n8n.computer_use"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 37.86854102509096,
+      "degraded": false
+    },
+    {
+      "query_id": "q09-en",
+      "query": "Configure AI tools for a workflow platform",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": false,
+      "packages": [
+        "n8n.platform",
+        "n8n_io_n8n.ai_workflow_builder",
+        "rtk.shell_output_proxy",
+        "n8n_io_n8n.workflow_sdk",
+        "n8n_io_n8n.n8n_workflow"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 42.79574999236502,
+      "degraded": false
+    },
+    {
+      "query_id": "q10-ru",
+      "query": "rtk.shell_output_proxy",
+      "exact_lookup": true,
+      "language": "ru",
+      "mode": "lexical",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "rtk.shell_output_proxy"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 5.793707998236641,
+      "degraded": false
+    },
+    {
+      "query_id": "q10-ru",
+      "query": "rtk.shell_output_proxy",
+      "exact_lookup": true,
+      "language": "ru",
+      "mode": "vector",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "rtk.shell_output_proxy"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 5.267625005217269,
+      "degraded": false
+    },
+    {
+      "query_id": "q10-ru",
+      "query": "rtk.shell_output_proxy",
+      "exact_lookup": true,
+      "language": "ru",
+      "mode": "hybrid",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "rtk.shell_output_proxy"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 5.096040986245498,
+      "degraded": false
+    },
+    {
+      "query_id": "q10-en",
+      "query": "rtk.shell_output_proxy",
+      "exact_lookup": true,
+      "language": "en",
+      "mode": "lexical",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "rtk.shell_output_proxy"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 4.892041004495695,
+      "degraded": false
+    },
+    {
+      "query_id": "q10-en",
+      "query": "rtk.shell_output_proxy",
+      "exact_lookup": true,
+      "language": "en",
+      "mode": "vector",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "rtk.shell_output_proxy"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 4.824999981792644,
+      "degraded": false
+    },
+    {
+      "query_id": "q10-en",
+      "query": "rtk.shell_output_proxy",
+      "exact_lookup": true,
+      "language": "en",
+      "mode": "hybrid",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "rtk.shell_output_proxy"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 5.351416999474168,
+      "degraded": false
+    },
+    {
+      "query_id": "q11-ru",
+      "query": "openai.codex",
+      "exact_lookup": true,
+      "language": "ru",
+      "mode": "lexical",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "openai.codex"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 5.231500021182001,
+      "degraded": false
+    },
+    {
+      "query_id": "q11-ru",
+      "query": "openai.codex",
+      "exact_lookup": true,
+      "language": "ru",
+      "mode": "vector",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "openai.codex"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 6.058291997760534,
+      "degraded": false
+    },
+    {
+      "query_id": "q11-ru",
+      "query": "openai.codex",
+      "exact_lookup": true,
+      "language": "ru",
+      "mode": "hybrid",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "openai.codex"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 4.931375005980954,
+      "degraded": false
+    },
+    {
+      "query_id": "q11-en",
+      "query": "openai.codex",
+      "exact_lookup": true,
+      "language": "en",
+      "mode": "lexical",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "openai.codex"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 5.545457999687642,
+      "degraded": false
+    },
+    {
+      "query_id": "q11-en",
+      "query": "openai.codex",
+      "exact_lookup": true,
+      "language": "en",
+      "mode": "vector",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "openai.codex"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 4.92591699003242,
+      "degraded": false
+    },
+    {
+      "query_id": "q11-en",
+      "query": "openai.codex",
+      "exact_lookup": true,
+      "language": "en",
+      "mode": "hybrid",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "openai.codex"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 4.785875004017726,
+      "degraded": false
+    },
+    {
+      "query_id": "q13-ru",
+      "query": "bitcoin.core.fullnode",
+      "exact_lookup": true,
+      "language": "ru",
+      "mode": "lexical",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "bitcoin.core.fullnode"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 4.539707995718345,
+      "degraded": false
+    },
+    {
+      "query_id": "q13-ru",
+      "query": "bitcoin.core.fullnode",
+      "exact_lookup": true,
+      "language": "ru",
+      "mode": "vector",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "bitcoin.core.fullnode"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 4.423959006089717,
+      "degraded": false
+    },
+    {
+      "query_id": "q13-ru",
+      "query": "bitcoin.core.fullnode",
+      "exact_lookup": true,
+      "language": "ru",
+      "mode": "hybrid",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "bitcoin.core.fullnode"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 4.9989999970421195,
+      "degraded": false
+    },
+    {
+      "query_id": "q13-en",
+      "query": "bitcoin.core.fullnode",
+      "exact_lookup": true,
+      "language": "en",
+      "mode": "lexical",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "bitcoin.core.fullnode"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 4.757957998663187,
+      "degraded": false
+    },
+    {
+      "query_id": "q13-en",
+      "query": "bitcoin.core.fullnode",
+      "exact_lookup": true,
+      "language": "en",
+      "mode": "vector",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "bitcoin.core.fullnode"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 4.653708019759506,
+      "degraded": false
+    },
+    {
+      "query_id": "q13-en",
+      "query": "bitcoin.core.fullnode",
+      "exact_lookup": true,
+      "language": "en",
+      "mode": "hybrid",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "bitcoin.core.fullnode"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 4.65691601857543,
+      "degraded": false
+    },
+    {
+      "query_id": "q17-ru",
+      "query": "Распознавание опухолей на МРТ",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": true,
+      "packages": [],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 3.950999991502613,
+      "degraded": false
+    },
+    {
+      "query_id": "q17-ru",
+      "query": "Распознавание опухолей на МРТ",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": true,
+      "packages": [
+        "n8n_io_n8n.crdt",
+        "n8n_io_n8n.imap",
+        "n8n_io_n8n.tournament",
+        "n8n_io_n8n.client_oauth2",
+        "n8n_io_n8n.workspace"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 58.78129100892693,
+      "degraded": false
+    },
+    {
+      "query_id": "q17-ru",
+      "query": "Распознавание опухолей на МРТ",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": true,
+      "packages": [
+        "n8n_io_n8n.crdt",
+        "n8n_io_n8n.imap",
+        "n8n_io_n8n.tournament",
+        "n8n_io_n8n.client_oauth2",
+        "n8n_io_n8n.workspace"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 37.89300000062212,
+      "degraded": false
+    },
+    {
+      "query_id": "q17-en",
+      "query": "Detect tumors in MRI scans",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": true,
+      "packages": [
+        "axios.http_client",
+        "n8n_io_n8n.ai_utilities",
+        "n8n_io_n8n.codemirror_lang",
+        "n8n_io_n8n.ai_node_sdk",
+        "n8n.platform"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 9.774458972970024,
+      "degraded": false
+    },
+    {
+      "query_id": "q17-en",
+      "query": "Detect tumors in MRI scans",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": true,
+      "packages": [
+        "n8n_io_n8n.local_gateway",
+        "n8n_io_n8n.di",
+        "n8n_io_n8n.db",
+        "openai_codex.workspace",
+        "n8n_io_n8n.engine"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 36.59354199771769,
+      "degraded": false
+    },
+    {
+      "query_id": "q17-en",
+      "query": "Detect tumors in MRI scans",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": true,
+      "packages": [
+        "n8n_io_n8n.ai_node_sdk",
+        "n8n_io_n8n.ai_utilities",
+        "n8n_io_n8n.local_gateway",
+        "axios.http_client",
+        "n8n_io_n8n.di"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 37.98958400147967,
+      "degraded": false
+    },
+    {
+      "query_id": "q18-ru",
+      "query": "Прошивка для управления спутником",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": true,
+      "packages": [],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 9.558624995406717,
+      "degraded": false
+    },
+    {
+      "query_id": "q18-ru",
+      "query": "Прошивка для управления спутником",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": true,
+      "packages": [
+        "openai.codex",
+        "openai_codex.workspace",
+        "n8n_io_n8n.chat_hub",
+        "n8n_io_n8n.chat",
+        "n8n_io_n8n.crdt"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 39.312416018219665,
+      "degraded": false
+    },
+    {
+      "query_id": "q18-ru",
+      "query": "Прошивка для управления спутником",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": true,
+      "packages": [
+        "openai.codex",
+        "openai_codex.workspace",
+        "n8n_io_n8n.chat_hub",
+        "n8n_io_n8n.chat",
+        "n8n_io_n8n.crdt"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 41.004458005772904,
+      "degraded": false
+    },
+    {
+      "query_id": "q18-en",
+      "query": "Satellite attitude control firmware",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": true,
+      "packages": [
+        "n8n_io_n8n.mcp_browser_extension",
+        "axios.http_client",
+        "bitcoin.core.fullnode",
+        "openai.codex"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 10.457917000167072,
+      "degraded": false
+    },
+    {
+      "query_id": "q18-en",
+      "query": "Satellite attitude control firmware",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": true,
+      "packages": [
+        "n8n_io_n8n.ai_node_sdk",
+        "n8n_io_n8n.decorators",
+        "openai_codex.workspace",
+        "n8n_io_n8n.telemetry",
+        "n8n_io_n8n.codemirror_lang"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 34.14695800165646,
+      "degraded": false
+    },
+    {
+      "query_id": "q18-en",
+      "query": "Satellite attitude control firmware",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": true,
+      "packages": [
+        "openai.codex",
+        "n8n_io_n8n.mcp_browser_extension",
+        "n8n_io_n8n.ai_node_sdk",
+        "axios.http_client",
+        "n8n_io_n8n.decorators"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 37.479624996194616,
+      "degraded": false
+    },
+    {
+      "query_id": "q19-ru",
+      "query": "Расчет орбит экзопланет",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": true,
+      "packages": [],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 4.801000002771616,
+      "degraded": false
+    },
+    {
+      "query_id": "q19-ru",
+      "query": "Расчет орбит экзопланет",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": true,
+      "packages": [
+        "n8n_io_n8n.crdt",
+        "openai.codex",
+        "n8n_io_n8n.client_oauth2",
+        "openai_codex.workspace",
+        "n8n_io_n8n.tournament"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 37.197916011791676,
+      "degraded": false
+    },
+    {
+      "query_id": "q19-ru",
+      "query": "Расчет орбит экзопланет",
+      "exact_lookup": false,
+      "language": "ru",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": true,
+      "packages": [
+        "n8n_io_n8n.crdt",
+        "openai.codex",
+        "n8n_io_n8n.client_oauth2",
+        "openai_codex.workspace",
+        "n8n_io_n8n.tournament"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 39.82108298805542,
+      "degraded": false
+    },
+    {
+      "query_id": "q19-en",
+      "query": "Calculate exoplanet orbits",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": true,
+      "packages": [],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 5.186624999623746,
+      "degraded": false
+    },
+    {
+      "query_id": "q19-en",
+      "query": "Calculate exoplanet orbits",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": true,
+      "packages": [
+        "openai_codex.workspace",
+        "n8n_io_n8n.scheduler",
+        "axios_axios.axios",
+        "openai_codex.codex",
+        "n8n_io_n8n.constants"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 40.84975001751445,
+      "degraded": false
+    },
+    {
+      "query_id": "q19-en",
+      "query": "Calculate exoplanet orbits",
+      "exact_lookup": false,
+      "language": "en",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": true,
+      "packages": [
+        "openai_codex.workspace",
+        "n8n_io_n8n.scheduler",
+        "axios_axios.axios",
+        "openai_codex.codex",
+        "n8n_io_n8n.constants"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 42.04491700511426,
+      "degraded": false
+    }
+  ],
+  "exact_lookup": {
+    "language": "neutral",
+    "unique_queries": 3,
+    "observations": [
+      {
+        "query_id": "q10-ru",
+        "query": "rtk.shell_output_proxy",
+        "exact_lookup": true,
+        "language": "ru",
+        "mode": "lexical",
+        "effective_mode": "exact",
+        "negative": false,
+        "packages": [
+          "rtk.shell_output_proxy"
+        ],
+        "recall5": 1.0,
+        "ndcg5": 1.0,
+        "negative_strong": null,
+        "latency_ms": 5.793707998236641,
+        "degraded": false
+      },
+      {
+        "query_id": "q10-ru",
+        "query": "rtk.shell_output_proxy",
+        "exact_lookup": true,
+        "language": "ru",
+        "mode": "vector",
+        "effective_mode": "exact",
+        "negative": false,
+        "packages": [
+          "rtk.shell_output_proxy"
+        ],
+        "recall5": 1.0,
+        "ndcg5": 1.0,
+        "negative_strong": null,
+        "latency_ms": 5.267625005217269,
+        "degraded": false
+      },
+      {
+        "query_id": "q10-ru",
+        "query": "rtk.shell_output_proxy",
+        "exact_lookup": true,
+        "language": "ru",
+        "mode": "hybrid",
+        "effective_mode": "exact",
+        "negative": false,
+        "packages": [
+          "rtk.shell_output_proxy"
+        ],
+        "recall5": 1.0,
+        "ndcg5": 1.0,
+        "negative_strong": null,
+        "latency_ms": 5.096040986245498,
+        "degraded": false
+      },
+      {
+        "query_id": "q11-ru",
+        "query": "openai.codex",
+        "exact_lookup": true,
+        "language": "ru",
+        "mode": "lexical",
+        "effective_mode": "exact",
+        "negative": false,
+        "packages": [
+          "openai.codex"
+        ],
+        "recall5": 1.0,
+        "ndcg5": 1.0,
+        "negative_strong": null,
+        "latency_ms": 5.231500021182001,
+        "degraded": false
+      },
+      {
+        "query_id": "q11-ru",
+        "query": "openai.codex",
+        "exact_lookup": true,
+        "language": "ru",
+        "mode": "vector",
+        "effective_mode": "exact",
+        "negative": false,
+        "packages": [
+          "openai.codex"
+        ],
+        "recall5": 1.0,
+        "ndcg5": 1.0,
+        "negative_strong": null,
+        "latency_ms": 6.058291997760534,
+        "degraded": false
+      },
+      {
+        "query_id": "q11-ru",
+        "query": "openai.codex",
+        "exact_lookup": true,
+        "language": "ru",
+        "mode": "hybrid",
+        "effective_mode": "exact",
+        "negative": false,
+        "packages": [
+          "openai.codex"
+        ],
+        "recall5": 1.0,
+        "ndcg5": 1.0,
+        "negative_strong": null,
+        "latency_ms": 4.931375005980954,
+        "degraded": false
+      },
+      {
+        "query_id": "q13-ru",
+        "query": "bitcoin.core.fullnode",
+        "exact_lookup": true,
+        "language": "ru",
+        "mode": "lexical",
+        "effective_mode": "exact",
+        "negative": false,
+        "packages": [
+          "bitcoin.core.fullnode"
+        ],
+        "recall5": 1.0,
+        "ndcg5": 1.0,
+        "negative_strong": null,
+        "latency_ms": 4.539707995718345,
+        "degraded": false
+      },
+      {
+        "query_id": "q13-ru",
+        "query": "bitcoin.core.fullnode",
+        "exact_lookup": true,
+        "language": "ru",
+        "mode": "vector",
+        "effective_mode": "exact",
+        "negative": false,
+        "packages": [
+          "bitcoin.core.fullnode"
+        ],
+        "recall5": 1.0,
+        "ndcg5": 1.0,
+        "negative_strong": null,
+        "latency_ms": 4.423959006089717,
+        "degraded": false
+      },
+      {
+        "query_id": "q13-ru",
+        "query": "bitcoin.core.fullnode",
+        "exact_lookup": true,
+        "language": "ru",
+        "mode": "hybrid",
+        "effective_mode": "exact",
+        "negative": false,
+        "packages": [
+          "bitcoin.core.fullnode"
+        ],
+        "recall5": 1.0,
+        "ndcg5": 1.0,
+        "negative_strong": null,
+        "latency_ms": 4.9989999970421195,
+        "degraded": false
+      }
+    ],
+    "included_in_language_metrics": false
+  },
+  "targets_met_on_current_labels": true,
+  "quality_accepted": false,
+  "performance_scope": "actual corpus only; not a 1000-package load claim"
+}

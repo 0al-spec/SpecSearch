@@ -50,3 +50,21 @@ def test_fallback_and_vector_failure(tmp_path, package_factory):
     result = client.post("/v1/search", json=payload).json()
     assert result["degraded"] and result["mode"] == "lexical"
     assert client.post("/v1/search", json={**payload, "mode": "vector"}).status_code == 503
+
+
+def test_missing_snapshot_returns_not_found(tmp_path, package_factory):
+    store = Store(tmp_path)
+    store.build([package_factory()])
+    client = TestClient(create_app(SearchService(store)))
+    missing = "f" * 32
+    assert client.get(f"/v1/packages/rtk.proxy?snapshot={missing}").status_code == 404
+    assert (
+        client.post("/v1/verify", json={"record_id": "rtk.proxy", "snapshot": missing}).status_code
+        == 404
+    )
+
+
+def test_missing_candidate_root_is_unavailable(tmp_path, package_factory):
+    store = Store(tmp_path / "store")
+    store.build([package_factory(locator={"path": str(tmp_path / "deleted")})])
+    assert SearchService(store).verify("rtk.proxy")["status"] == "unavailable"
