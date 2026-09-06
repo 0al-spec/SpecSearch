@@ -90,12 +90,17 @@ article { padding: 26px 0 32px 30px; overflow-wrap: anywhere; }
 .detail-summary { font-size: 15px; max-width: 85ch; }
 .detail-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 20px 0; }
 .verification { font: 11px/1.5 var(--mono); color: var(--muted); }
-.section { border-top: 1px solid var(--rule-soft); padding: 20px 0; }
-.section>h3 { margin-bottom: 14px; text-transform: uppercase; font: 500 11px var(--mono); color: var(--muted); }
-.field { padding: 6px 0; line-height: 1.6; }
-.field-name { font: 11px var(--mono); color: var(--muted); margin-right: 8px; }
-.field ul { margin: 4px 0; padding-left: 18px; }
-.field li { margin: 5px 0; }
+.section { border-top: 1px solid var(--rule-soft); padding: 14px 0; }
+.section>h3 { margin-bottom: 10px; text-transform: uppercase; font: 500 11px var(--mono); color: var(--muted); }
+.field-value { line-height: 1.5; }
+.field-map { margin: 0; }
+.field-row { display: grid; grid-template-columns: minmax(64px, 100px) minmax(0, 1fr); column-gap: 12px; padding: 3px 0; }
+.field-name { font: 11px/1.9 var(--mono); color: var(--muted); overflow-wrap: anywhere; }
+.field-row dd { margin: 0; }
+.field-row .field-row { grid-template-columns: minmax(56px, 80px) minmax(0, 1fr); }
+.field-list { list-style: none; margin: 0; padding: 0; }
+.field-list>li+li { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--rule-soft); }
+td .field-row { grid-template-columns: minmax(48px, 70px) minmax(0, 1fr); gap: 8px; }
 .group { border-left: 2px solid var(--rule-soft); padding-left: 12px; margin: 12px 0; }
 .snippet { margin: 12px 0; line-height: 1.6; }
 .snippet a, .snippet code { font: 11px/1.6 var(--mono); overflow-wrap: anywhere; }
@@ -124,6 +129,8 @@ footer { border-top: 1px solid var(--rule); padding: 18px 32px; display: flex; j
   aside { border-right: 0; padding-right: 0; max-height: 55vh; overflow: auto; border-bottom: 1px solid var(--rule-mid); }
   article { padding: 24px 0; }
   .detail-heading h2 { font-size: 26px; }
+  .field-row { grid-template-columns: 76px minmax(0, 1fr); gap: 8px; }
+  .field-row .field-row { grid-template-columns: 1fr; gap: 0; }
   footer { padding: 16px; flex-wrap: wrap; }
   dialog { padding: 12px; }
   #comparison-content { overflow: auto; }

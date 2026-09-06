@@ -49,3 +49,26 @@ test('hostile package text stays inert',async({page})=>{
   expect(await page.evaluate(()=>('pwned' in window))).toBeFalsy();
   await expect(page.locator('.detail-summary img')).toHaveCount(0);
 });
+
+for(const width of [1440,390]) {
+  test(`compact capability fields at ${width}px`,async({page})=>{
+    await page.setViewportSize({width,height:960});
+    await page.route('**/v1/packages/**',async route=>{
+      const response=await route.fetch();const body=await response.json();
+      body.details.specs=[{provides:{capabilities:[{id:'openai.codex.local_agent_turns',role:'primary',summary:'Run a local coding-agent turn from the Codex CLI against a repository-oriented working context and receive the agent result through the CLI surface.'}]}}];
+      await route.fulfill({json:body});
+    });
+    await page.goto('/?source=candidates&q=rtk.shell_output_proxy');
+    const section=page.locator('#detail .section').filter({has:page.getByRole('heading',{name:'Capabilities',exact:true})});
+    await expect(section.locator('dt')).toHaveText(['id','role','summary']);
+    const role=section.locator('.field-row').filter({has:page.locator('dt').filter({hasText:/^role$/})});
+    const bounds=await role.evaluate(e=>{const label=e.querySelector('dt')!.getBoundingClientRect();const value=e.querySelector('dd')!.getBoundingClientRect();return {height:e.getBoundingClientRect().height,labelY:label.y,valueY:value.y,labelRight:label.right,valueX:value.x};});
+    expect(bounds.height).toBeLessThan(32);
+    expect(bounds.labelY).toBe(bounds.valueY);
+    expect(bounds.labelRight).toBeLessThan(bounds.valueX);
+    expect((await section.boundingBox())!.height).toBeLessThan(width>760?220:320);
+    await section.scrollIntoViewIfNeeded();
+    await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
+    await page.screenshot({path:`.data/screenshots/compact-capabilities-${width}.png`});
+  });
+}

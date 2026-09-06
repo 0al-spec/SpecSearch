@@ -22,13 +22,13 @@ function logo(pid:string){
 }
 function badge(text:string, candidate=false){return el('span',text,'badge'+(candidate?' candidate':''));}
 function renderValue(value:unknown):HTMLElement{
- const node=el('div','', 'field');
+ const node=el('div','', 'field-value');
  if(value===null||value===undefined){node.append(el('span','Not declared','muted'));return node;}
- if(Array.isArray(value)){if(!value.length){node.textContent='No entries declared';return node;}const list=el('ul');for(const item of value){const li=el('li');li.append(renderValue(item));list.append(li);}node.append(list);return node;}
- if(typeof value==='object'){for(const [key,item]of Object.entries(value)){const row=el('div','', 'field');row.append(el('span',key.replace(/([a-z])([A-Z])/g,'$1 $2').replaceAll('_',' '),'field-name'));row.append(renderValue(item));node.append(row);}return node;}
+ if(Array.isArray(value)){if(!value.length){node.textContent='No entries declared';return node;}const list=el('ul','', 'field-list');for(const item of value){const li=el('li');li.append(renderValue(item));list.append(li);}node.append(list);return node;}
+ if(typeof value==='object'){const list=el('dl','', 'field-map');for(const [key,item]of Object.entries(value)){const row=el('div','', 'field-row');row.append(el('dt',key.replace(/([a-z])([A-Z])/g,'$1 $2').replaceAll('_',' '),'field-name'));const content=el('dd');content.append(renderValue(item));row.append(content);list.append(row);}node.append(list);return node;}
  node.textContent=String(value);return node;
 }
-function section(title:string,value:unknown){const node=el('section','', 'section');node.append(el('h3',title),renderValue(value));return node;}
+function section(title:string,value:unknown){const node=el('section','', 'section');if(value&&typeof value==='object'&&!Array.isArray(value)){const entries=Object.entries(value);if(entries.length===1&&entries[0][0].toLowerCase()===title.toLowerCase())value=entries[0][1];}node.append(el('h3',title),renderValue(value));return node;}
 function disclosure(title:string,value:unknown){const node=el('details');node.append(el('summary',title),el('pre',JSON.stringify(value,null,2)));return node;}
 function showField(p:Package,path:string){
  const dialog=document.createElement('dialog');dialog.setAttribute('aria-label','Source field');
