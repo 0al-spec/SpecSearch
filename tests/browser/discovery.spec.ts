@@ -8,6 +8,9 @@ for (const width of [1440, 390]) {
     await expect(page.locator('#detail h2')).toHaveText('RTK Shell Output Compression Proxy');
     await page.getByRole('button',{name:'Verify metadata'}).click();
     await expect(page.locator('.verification')).toHaveText('matched_metadata');
+    await page.locator('.snippet a').first().click();
+    await expect(page.getByRole('dialog',{name:'Source field'})).toBeVisible();
+    await page.getByRole('button',{name:'Close source field'}).click();
     await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBeTruthy();
     await expect.poll(()=>page.locator('img').evaluateAll(images=>images.every(i=>(i as HTMLImageElement).naturalWidth>0))).toBeTruthy();
     await page.screenshot({path:`.data/screenshots/detail-${width}.png`,fullPage:false});

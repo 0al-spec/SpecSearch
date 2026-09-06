@@ -1,0 +1,9 @@
+.git
+.venv
+.data
+node_modules
+.pytest_cache
+.ruff_cache
+__pycache__
+config.local.json
+test-results

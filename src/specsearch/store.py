@@ -130,6 +130,10 @@ class Store:
                 "documents": len(docs),
                 "provider": provider,
                 "corpus_digest": digest(sorted(p.record_id for p in packages)),
+                "collections": {
+                    kind: sum(p.source_kind == kind for p in packages)
+                    for kind in ("registry", "candidates")
+                },
             }
             con.execute("INSERT INTO metadata VALUES('status',?)", (json.dumps(metadata),))
             con.commit()

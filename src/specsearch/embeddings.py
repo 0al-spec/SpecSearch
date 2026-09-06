@@ -95,6 +95,9 @@ class Embedder:
             match = next((m for m in models if m["id"] == self.model), None)
             if not match or match.get("type") != "embeddings":
                 raise EmbeddingError("embedding_model_missing")
+            context = match.get("loaded_context_length")
+            if type(context) is not int or context < 1100:
+                raise EmbeddingError("embedding_context_not_confirmed")
             # LM Studio's model ID alone does not bind the served GGUF variant.
             path = Path(self.config["artifact_path"])
             with path.open("rb") as file:

@@ -1,0 +1,24 @@
+services:
+  specsearch:
+    build: .
+    ports:
+      - "127.0.0.1:8031:8030"
+    volumes:
+      - specsearch-data:/data
+      - ./.data/docker-config.json:/config/config.json:ro
+      - ./.data/corpus:/corpus:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 2g
+    healthcheck:
+      test: [CMD, /app/.venv/bin/python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8030/v1/status',timeout=5)"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+volumes:
+  specsearch-data:
