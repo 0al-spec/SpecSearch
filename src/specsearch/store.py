@@ -117,6 +117,8 @@ class Store:
             if embedder:
                 provider = embedder.identity()
                 vectors = embedder.documents([doc.text for doc in docs])
+                if embedder.identity() != provider:
+                    raise ValueError("model_changed_during_build")
                 if len(vectors) != len(docs):
                     raise ValueError("vector_count_mismatch")
                 for i, vector in enumerate(vectors, 1):
