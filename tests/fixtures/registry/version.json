@@ -1,0 +1,63 @@
+{
+  "apiVersion": "specpm.registry/v0",
+  "kind": "RemotePackageVersion",
+  "package": {
+    "compatibility": {
+      "languages": [],
+      "platforms": [
+        "any"
+      ]
+    },
+    "intent_mappings": [
+      {
+        "capability_id": "document_conversion.email_to_markdown",
+        "intent_id": "intent.document_conversion.email_to_markdown"
+      }
+    ],
+    "license": "MIT",
+    "match": "direct",
+    "name": "Email Tools",
+    "package_id": "document_conversion.email_tools",
+    "provenance_receipt": {
+      "apiVersion": "specpm.receipts/v0",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "ea71bca5c8957854b9ca78ef9e985b6ea1c4376e93a7661eabc627420c5b1500"
+      },
+      "kind": "provenance_receipt",
+      "receiptProfile": "public_static_index_build_v0",
+      "size": 2251,
+      "url": "http://localhost:8081/v0/packages/document_conversion.email_tools/versions/0.1.0/provenance-receipt/index.json"
+    },
+    "provided_capabilities": [
+      "document_conversion.email_to_markdown"
+    ],
+    "provided_intents": [
+      "intent.document_conversion.email_to_markdown"
+    ],
+    "required_capabilities": [],
+    "scope": "package",
+    "source": {
+      "digest": {
+        "algorithm": "sha256",
+        "value": "a0d490e28e6605ef6ed78701d2c372fb5c9d335e3edef8ae59a93bd2b8f6599e"
+      },
+      "format": "specpm-tar-gzip-v0",
+      "kind": "archive",
+      "size": 1064,
+      "url": "http://localhost:8081/v0/packages/document_conversion.email_tools/versions/0.1.0/document_conversion.email_tools-0.1.0.specpm.tgz"
+    },
+    "state": {
+      "deprecated": false,
+      "yanked": false
+    },
+    "subject": {
+      "kind": "package",
+      "scope": "package"
+    },
+    "summary": "Boundary specifications for email document conversion.",
+    "version": "0.1.0"
+  },
+  "schemaVersion": 1,
+  "status": "ok"
+}

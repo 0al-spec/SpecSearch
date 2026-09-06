@@ -1,0 +1,1174 @@
+{
+  "at": "2026-09-06T15:47:52.292141+00:00",
+  "split": "dev",
+  "labels_status": "provisional",
+  "queries_digest": "e9dfbea25640e01fd55cbd80dd32908f31890a772d2c26a74795bb4d2f35e16e",
+  "index": {
+    "snapshot": "d9fc43c442134aa5b2a88eee818734a0",
+    "created_at": "2026-09-06T15:44:31.476548+00:00",
+    "packages": 89,
+    "documents": 279,
+    "provider": {
+      "kind": "lmstudio",
+      "model": "text-embedding-nomic-embed-text-v1.5",
+      "artifact": "8ec171612d08e2b96532b38eb655f26e0fdd00c6735eab5e2d88a6ea3c152ed8",
+      "dimension": 768,
+      "preprocessing": "nomic-prefix-utf8-1024-mean/v1"
+    },
+    "corpus_digest": "279cf935b99c8966651fa6297f45442cea4037b3ea40772a05544e4382d3772e"
+  },
+  "calibration": {
+    "value": 0.6493065165115356,
+    "split": "dev",
+    "labels_status": "provisional",
+    "queries_digest": "e9dfbea25640e01fd55cbd80dd32908f31890a772d2c26a74795bb4d2f35e16e",
+    "provider_digest": "ced62a5b492e0ddf06adf158c138e56b2f64d78146ad52c083bb4dbba6acbefc",
+    "corpus_digest": "279cf935b99c8966651fa6297f45442cea4037b3ea40772a05544e4382d3772e",
+    "at": "2026-09-06T15:44:58.857037+00:00",
+    "dev_positive_strong_correct_rate": 0.6,
+    "dev_negative_strong_rate": 0.0,
+    "observations": [
+      {
+        "query_id": "q00-ru",
+        "negative": false,
+        "score": 0.5644381642341614,
+        "correct": false
+      },
+      {
+        "query_id": "q00-en",
+        "negative": false,
+        "score": 0.7184395790100098,
+        "correct": true
+      },
+      {
+        "query_id": "q01-ru",
+        "negative": false,
+        "score": 0.5698833465576172,
+        "correct": false
+      },
+      {
+        "query_id": "q01-en",
+        "negative": false,
+        "score": 0.7283638715744019,
+        "correct": true
+      },
+      {
+        "query_id": "q02-ru",
+        "negative": false,
+        "score": 0.6723761558532715,
+        "correct": true
+      },
+      {
+        "query_id": "q02-en",
+        "negative": false,
+        "score": 0.7523699998855591,
+        "correct": true
+      },
+      {
+        "query_id": "q03-ru",
+        "negative": false,
+        "score": 0.6369718313217163,
+        "correct": true
+      },
+      {
+        "query_id": "q03-en",
+        "negative": false,
+        "score": 0.7814129590988159,
+        "correct": true
+      },
+      {
+        "query_id": "q04-ru",
+        "negative": false,
+        "score": 0.5356253981590271,
+        "correct": false
+      },
+      {
+        "query_id": "q04-en",
+        "negative": false,
+        "score": 0.7171638011932373,
+        "correct": true
+      },
+      {
+        "query_id": "q12-ru",
+        "negative": false,
+        "score": null,
+        "correct": true
+      },
+      {
+        "query_id": "q12-en",
+        "negative": false,
+        "score": null,
+        "correct": true
+      },
+      {
+        "query_id": "q14-ru",
+        "negative": false,
+        "score": null,
+        "correct": true
+      },
+      {
+        "query_id": "q14-en",
+        "negative": false,
+        "score": null,
+        "correct": true
+      },
+      {
+        "query_id": "q15-ru",
+        "negative": true,
+        "score": 0.5361053943634033,
+        "correct": false
+      },
+      {
+        "query_id": "q15-en",
+        "negative": true,
+        "score": 0.6493064165115356,
+        "correct": false
+      },
+      {
+        "query_id": "q16-ru",
+        "negative": true,
+        "score": 0.5490601062774658,
+        "correct": false
+      },
+      {
+        "query_id": "q16-en",
+        "negative": true,
+        "score": 0.6070769429206848,
+        "correct": false
+      }
+    ]
+  },
+  "metrics": {
+    "lexical": {
+      "ru": {
+        "positive_queries": 7,
+        "negative_queries": 2,
+        "recall5": 0.5714285714285714,
+        "ndcg5": 0.5187042505102082,
+        "negative_strong_rate": null,
+        "p95_ms": 34.371208201628164
+      },
+      "en": {
+        "positive_queries": 7,
+        "negative_queries": 2,
+        "recall5": 1.0,
+        "ndcg5": 1.0,
+        "negative_strong_rate": null,
+        "p95_ms": 17.171233205590397
+      },
+      "all": {
+        "positive_queries": 14,
+        "negative_queries": 4,
+        "recall5": 0.7857142857142857,
+        "ndcg5": 0.7593521252551041,
+        "negative_strong_rate": null,
+        "p95_ms": 22.712631270405794
+      }
+    },
+    "vector": {
+      "ru": {
+        "positive_queries": 7,
+        "negative_queries": 2,
+        "recall5": 0.7142857142857143,
+        "ndcg5": 0.6615613933673511,
+        "negative_strong_rate": 0.0,
+        "p95_ms": 271.4839915977791
+      },
+      "en": {
+        "positive_queries": 7,
+        "negative_queries": 2,
+        "recall5": 1.0,
+        "ndcg5": 1.0,
+        "negative_strong_rate": 0.0,
+        "p95_ms": 247.99277480342425
+      },
+      "all": {
+        "positive_queries": 14,
+        "negative_queries": 4,
+        "recall5": 0.8571428571428571,
+        "ndcg5": 0.8307806966836756,
+        "negative_strong_rate": 0.0,
+        "p95_ms": 256.16283299023047
+      }
+    },
+    "hybrid": {
+      "ru": {
+        "positive_queries": 7,
+        "negative_queries": 2,
+        "recall5": 0.7142857142857143,
+        "ndcg5": 0.6615613933673511,
+        "negative_strong_rate": 0.0,
+        "p95_ms": 258.38014960172586
+      },
+      "en": {
+        "positive_queries": 7,
+        "negative_queries": 2,
+        "recall5": 1.0,
+        "ndcg5": 1.0,
+        "negative_strong_rate": 0.0,
+        "p95_ms": 252.18382519087754
+      },
+      "all": {
+        "positive_queries": 14,
+        "negative_queries": 4,
+        "recall5": 0.8571428571428571,
+        "ndcg5": 0.8307806966836756,
+        "negative_strong_rate": 0.0,
+        "p95_ms": 254.1054124070797
+      }
+    }
+  },
+  "observations": [
+    {
+      "query_id": "q00-ru",
+      "language": "ru",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": false,
+      "packages": [
+        "n8n_io_n8n.ai_utilities",
+        "n8n_io_n8n.ai_node_sdk",
+        "n8n_io_n8n.instance_ai",
+        "n8n_io_n8n.ai_workflow_builder",
+        "n8n.platform"
+      ],
+      "recall5": 0.0,
+      "ndcg5": 0.0,
+      "negative_strong": null,
+      "latency_ms": 47.82662499928847,
+      "degraded": false
+    },
+    {
+      "query_id": "q00-ru",
+      "language": "ru",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": false,
+      "packages": [
+        "n8n.platform",
+        "axios_axios.axios",
+        "n8n_io_n8n.computer_use",
+        "rtk_ai_rtk.core",
+        "n8n_io_n8n.ai_node_sdk"
+      ],
+      "recall5": 0.0,
+      "ndcg5": 0.0,
+      "negative_strong": null,
+      "latency_ms": 287.2834579902701,
+      "degraded": false
+    },
+    {
+      "query_id": "q00-ru",
+      "language": "ru",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": false,
+      "packages": [
+        "n8n.platform",
+        "n8n_io_n8n.ai_node_sdk",
+        "n8n_io_n8n.instance_ai",
+        "n8n_io_n8n.computer_use",
+        "rtk_ai_rtk.core"
+      ],
+      "recall5": 0.0,
+      "ndcg5": 0.0,
+      "negative_strong": null,
+      "latency_ms": 262.1799159969669,
+      "degraded": false
+    },
+    {
+      "query_id": "q00-en",
+      "language": "en",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": false,
+      "packages": [
+        "rtk.shell_output_proxy",
+        "openai.codex",
+        "openai_codex.codex",
+        "n8n.platform",
+        "n8n_io_n8n.computer_use"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 18.28075002413243,
+      "degraded": false
+    },
+    {
+      "query_id": "q00-en",
+      "language": "en",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": false,
+      "packages": [
+        "rtk.shell_output_proxy",
+        "n8n.platform",
+        "n8n_io_n8n.agents",
+        "openai.codex",
+        "n8n_io_n8n.instance_ai"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 250.67095799022354,
+      "degraded": false
+    },
+    {
+      "query_id": "q00-en",
+      "language": "en",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": false,
+      "packages": [
+        "rtk.shell_output_proxy",
+        "openai.codex",
+        "n8n.platform",
+        "n8n_io_n8n.agents",
+        "n8n_io_n8n.instance_ai"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 252.22354198922403,
+      "degraded": false
+    },
+    {
+      "query_id": "q01-ru",
+      "language": "ru",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": false,
+      "packages": [],
+      "recall5": 0.0,
+      "ndcg5": 0.0,
+      "negative_strong": null,
+      "latency_ms": 7.615292008267716,
+      "degraded": false
+    },
+    {
+      "query_id": "q01-ru",
+      "language": "ru",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": false,
+      "packages": [
+        "n8n_io_n8n.crdt",
+        "openai.codex",
+        "n8n_io_n8n.create_node",
+        "n8n_io_n8n.decorators",
+        "n8n_io_n8n.eslint_plugin_community_nodes"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 0.6309297535714574,
+      "negative_strong": null,
+      "latency_ms": 237.81258301460184,
+      "degraded": false
+    },
+    {
+      "query_id": "q01-ru",
+      "language": "ru",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": false,
+      "packages": [
+        "n8n_io_n8n.crdt",
+        "openai.codex",
+        "n8n_io_n8n.create_node",
+        "n8n_io_n8n.decorators",
+        "n8n_io_n8n.eslint_plugin_community_nodes"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 0.6309297535714574,
+      "negative_strong": null,
+      "latency_ms": 244.89300002460368,
+      "degraded": false
+    },
+    {
+      "query_id": "q01-en",
+      "language": "en",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": false,
+      "packages": [
+        "openai.codex",
+        "n8n.platform",
+        "rtk.shell_output_proxy",
+        "openai_codex.codex",
+        "n8n_io_n8n.agents"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 15.506957977777347,
+      "degraded": false
+    },
+    {
+      "query_id": "q01-en",
+      "language": "en",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": false,
+      "packages": [
+        "openai.codex",
+        "openai_codex.workspace",
+        "n8n_io_n8n.decorators",
+        "n8n_io_n8n.agents",
+        "openai_codex.codex"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 237.48687500483356,
+      "degraded": false
+    },
+    {
+      "query_id": "q01-en",
+      "language": "en",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": false,
+      "packages": [
+        "openai.codex",
+        "n8n.platform",
+        "openai_codex.codex",
+        "n8n_io_n8n.agents",
+        "n8n_io_n8n.local_gateway"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 251.41358299879357,
+      "degraded": false
+    },
+    {
+      "query_id": "q02-ru",
+      "language": "ru",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": false,
+      "packages": [
+        "axios.http_client",
+        "axios_axios.axios",
+        "bitcoin.core.fullnode",
+        "n8n.platform",
+        "n8n_io_n8n.n8n_node_dev"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 14.188083005137742,
+      "degraded": false
+    },
+    {
+      "query_id": "q02-ru",
+      "language": "ru",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": false,
+      "packages": [
+        "axios.http_client",
+        "axios_axios.axios",
+        "n8n_io_n8n.node_cli",
+        "bitcoin.core.fullnode",
+        "openai.codex"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 235.0670000014361,
+      "degraded": false
+    },
+    {
+      "query_id": "q02-ru",
+      "language": "ru",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": false,
+      "packages": [
+        "axios.http_client",
+        "axios_axios.axios",
+        "bitcoin.core.fullnode",
+        "n8n_io_n8n.node_cli",
+        "n8n.platform"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 251.7001660016831,
+      "degraded": false
+    },
+    {
+      "query_id": "q02-en",
+      "language": "en",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": false,
+      "packages": [
+        "axios.http_client",
+        "axios_axios.axios",
+        "bitcoin.core.fullnode",
+        "n8n_io_n8n.mcp_browser",
+        "n8n_io_n8n.mcp_browser_extension"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 14.285874989582226,
+      "degraded": false
+    },
+    {
+      "query_id": "q02-en",
+      "language": "en",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": false,
+      "packages": [
+        "axios.http_client",
+        "axios_axios.axios",
+        "bitcoin.core.fullnode",
+        "openai.codex",
+        "n8n_io_n8n.mcp_browser_extension"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 243.97550002322532,
+      "degraded": false
+    },
+    {
+      "query_id": "q02-en",
+      "language": "en",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": false,
+      "packages": [
+        "axios.http_client",
+        "axios_axios.axios",
+        "bitcoin.core.fullnode",
+        "n8n_io_n8n.mcp_browser_extension",
+        "n8n_io_n8n.mcp_browser"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 248.2977499894332,
+      "degraded": false
+    },
+    {
+      "query_id": "q03-ru",
+      "language": "ru",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": false,
+      "packages": [
+        "bitcoin_bitcoin.core",
+        "bitcoin.core.fullnode"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 0.6309297535714574,
+      "negative_strong": null,
+      "latency_ms": 9.68166600796394,
+      "degraded": false
+    },
+    {
+      "query_id": "q03-ru",
+      "language": "ru",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": false,
+      "packages": [
+        "bitcoin.core.fullnode",
+        "bitcoin_bitcoin.core",
+        "openai.codex",
+        "openai_codex.workspace",
+        "n8n_io_n8n.n8n_nodes_base"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 247.78479200904258,
+      "degraded": false
+    },
+    {
+      "query_id": "q03-ru",
+      "language": "ru",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": false,
+      "packages": [
+        "bitcoin.core.fullnode",
+        "bitcoin_bitcoin.core",
+        "openai.codex",
+        "openai_codex.workspace",
+        "n8n_io_n8n.n8n_nodes_base"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 252.68050000886433,
+      "degraded": false
+    },
+    {
+      "query_id": "q03-en",
+      "language": "en",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": false,
+      "packages": [
+        "bitcoin.core.fullnode",
+        "bitcoin_bitcoin.core",
+        "openai.codex",
+        "n8n_io_n8n.n8n_node_dev",
+        "n8n_io_n8n.node_cli"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 14.732957992237061,
+      "degraded": false
+    },
+    {
+      "query_id": "q03-en",
+      "language": "en",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": false,
+      "packages": [
+        "bitcoin.core.fullnode",
+        "n8n_io_n8n.n8n_nodes_base",
+        "n8n_io_n8n.node_cli",
+        "n8n_io_n8n.create_node",
+        "openai.codex"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 241.50875001214445,
+      "degraded": false
+    },
+    {
+      "query_id": "q03-en",
+      "language": "en",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": false,
+      "packages": [
+        "bitcoin.core.fullnode",
+        "bitcoin_bitcoin.core",
+        "n8n_io_n8n.node_cli",
+        "openai.codex",
+        "n8n_io_n8n.create_node"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 252.1242499933578,
+      "degraded": false
+    },
+    {
+      "query_id": "q04-ru",
+      "language": "ru",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": false,
+      "packages": [],
+      "recall5": 0.0,
+      "ndcg5": 0.0,
+      "negative_strong": null,
+      "latency_ms": 7.155250001233071,
+      "degraded": false
+    },
+    {
+      "query_id": "q04-ru",
+      "language": "ru",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": false,
+      "packages": [
+        "axios_axios.axios",
+        "n8n_io_n8n.tournament",
+        "n8n_io_n8n.composables",
+        "openai.codex",
+        "openai_codex.workspace"
+      ],
+      "recall5": 0.0,
+      "ndcg5": 0.0,
+      "negative_strong": null,
+      "latency_ms": 246.62700001499616,
+      "degraded": false
+    },
+    {
+      "query_id": "q04-ru",
+      "language": "ru",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": false,
+      "packages": [
+        "axios_axios.axios",
+        "n8n_io_n8n.tournament",
+        "n8n_io_n8n.composables",
+        "openai.codex",
+        "openai_codex.workspace"
+      ],
+      "recall5": 0.0,
+      "ndcg5": 0.0,
+      "negative_strong": null,
+      "latency_ms": 246.9450409989804,
+      "degraded": false
+    },
+    {
+      "query_id": "q04-en",
+      "language": "en",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": false,
+      "packages": [
+        "n8n.platform",
+        "n8n_io_n8n.n8n",
+        "rtk_ai_rtk.core",
+        "n8n_io_n8n.n8n_workflow",
+        "n8n_io_n8n.ai_workflow_builder"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 10.927374998573214,
+      "degraded": false
+    },
+    {
+      "query_id": "q04-en",
+      "language": "en",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": false,
+      "packages": [
+        "n8n.platform",
+        "n8n_io_n8n.ai_workflow_builder",
+        "n8n_io_n8n.n8n",
+        "n8n_io_n8n.n8n_editor_ui",
+        "n8n_io_n8n.workflow_sdk"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 240.33887500991113,
+      "degraded": false
+    },
+    {
+      "query_id": "q04-en",
+      "language": "en",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": false,
+      "packages": [
+        "n8n.platform",
+        "n8n_io_n8n.n8n",
+        "n8n_io_n8n.ai_workflow_builder",
+        "n8n_io_n8n.n8n_workflow",
+        "n8n_io_n8n.workflow_sdk"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 251.66504198568873,
+      "degraded": false
+    },
+    {
+      "query_id": "q12-ru",
+      "language": "ru",
+      "mode": "lexical",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "axios.http_client"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 7.692833984037861,
+      "degraded": false
+    },
+    {
+      "query_id": "q12-ru",
+      "language": "ru",
+      "mode": "vector",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "axios.http_client"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 7.631958986166865,
+      "degraded": false
+    },
+    {
+      "query_id": "q12-ru",
+      "language": "ru",
+      "mode": "hybrid",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "axios.http_client"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 7.396707980660722,
+      "degraded": false
+    },
+    {
+      "query_id": "q12-en",
+      "language": "en",
+      "mode": "lexical",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "axios.http_client"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 7.560375001048669,
+      "degraded": false
+    },
+    {
+      "query_id": "q12-en",
+      "language": "en",
+      "mode": "vector",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "axios.http_client"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 7.776916987495497,
+      "degraded": false
+    },
+    {
+      "query_id": "q12-en",
+      "language": "en",
+      "mode": "hybrid",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "axios.http_client"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 7.864499988500029,
+      "degraded": false
+    },
+    {
+      "query_id": "q14-ru",
+      "language": "ru",
+      "mode": "lexical",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "n8n.platform"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 8.388209011172876,
+      "degraded": false
+    },
+    {
+      "query_id": "q14-ru",
+      "language": "ru",
+      "mode": "vector",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "n8n.platform"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 8.788000006461516,
+      "degraded": false
+    },
+    {
+      "query_id": "q14-ru",
+      "language": "ru",
+      "mode": "hybrid",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "n8n.platform"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 8.789249986875802,
+      "degraded": false
+    },
+    {
+      "query_id": "q14-en",
+      "language": "en",
+      "mode": "lexical",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "n8n.platform"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 8.74433302669786,
+      "degraded": false
+    },
+    {
+      "query_id": "q14-en",
+      "language": "en",
+      "mode": "vector",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "n8n.platform"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 8.94749999861233,
+      "degraded": false
+    },
+    {
+      "query_id": "q14-en",
+      "language": "en",
+      "mode": "hybrid",
+      "effective_mode": "exact",
+      "negative": false,
+      "packages": [
+        "n8n.platform"
+      ],
+      "recall5": 1.0,
+      "ndcg5": 1.0,
+      "negative_strong": null,
+      "latency_ms": 8.91116599086672,
+      "degraded": false
+    },
+    {
+      "query_id": "q15-ru",
+      "language": "ru",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": true,
+      "packages": [],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 7.102250005118549,
+      "degraded": false
+    },
+    {
+      "query_id": "q15-ru",
+      "language": "ru",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": true,
+      "packages": [
+        "bitcoin_bitcoin.core",
+        "openai_codex.workspace",
+        "rtk_ai_rtk.core",
+        "axios_axios.axios",
+        "n8n_io_n8n.tournament"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 244.8898750008084,
+      "degraded": false
+    },
+    {
+      "query_id": "q15-ru",
+      "language": "ru",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": true,
+      "packages": [
+        "bitcoin_bitcoin.core",
+        "openai_codex.workspace",
+        "rtk_ai_rtk.core",
+        "axios_axios.axios",
+        "n8n_io_n8n.tournament"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 243.72170900460333,
+      "degraded": false
+    },
+    {
+      "query_id": "q15-en",
+      "language": "en",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": true,
+      "packages": [
+        "openai.codex",
+        "axios.http_client",
+        "rtk.shell_output_proxy",
+        "n8n.platform",
+        "openai_codex.codex"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 14.72537498921156,
+      "degraded": false
+    },
+    {
+      "query_id": "q15-en",
+      "language": "en",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": true,
+      "packages": [
+        "n8n_io_n8n.n8n_workflow",
+        "n8n_io_n8n.engine",
+        "n8n_io_n8n.tournament",
+        "n8n_io_n8n.di",
+        "openai_codex.workspace"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 234.60320898448117,
+      "degraded": false
+    },
+    {
+      "query_id": "q15-en",
+      "language": "en",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": true,
+      "packages": [
+        "openai.codex",
+        "n8n_io_n8n.engine",
+        "n8n_io_n8n.tournament",
+        "n8n_io_n8n.n8n_workflow",
+        "openai_codex.workspace"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 249.10425001871772,
+      "degraded": false
+    },
+    {
+      "query_id": "q16-ru",
+      "language": "ru",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": true,
+      "packages": [],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 6.694374984363094,
+      "degraded": false
+    },
+    {
+      "query_id": "q16-ru",
+      "language": "ru",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": true,
+      "packages": [
+        "n8n_io_n8n.imap",
+        "n8n_io_n8n.chat",
+        "n8n_io_n8n.i18n",
+        "n8n_io_n8n.tournament",
+        "openai.codex"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 243.80774999735877,
+      "degraded": false
+    },
+    {
+      "query_id": "q16-ru",
+      "language": "ru",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": true,
+      "packages": [
+        "n8n_io_n8n.imap",
+        "n8n_io_n8n.chat",
+        "n8n_io_n8n.i18n",
+        "n8n_io_n8n.tournament",
+        "openai.codex"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 239.37216599006206,
+      "degraded": false
+    },
+    {
+      "query_id": "q16-en",
+      "language": "en",
+      "mode": "lexical",
+      "effective_mode": "lexical",
+      "negative": true,
+      "packages": [
+        "n8n_io_n8n.mcp_browser",
+        "rtk.shell_output_proxy"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 8.561166992876679,
+      "degraded": false
+    },
+    {
+      "query_id": "q16-en",
+      "language": "en",
+      "mode": "vector",
+      "effective_mode": "vector",
+      "negative": true,
+      "packages": [
+        "n8n_io_n8n.syslog_client",
+        "n8n_io_n8n.mcp_browser",
+        "n8n_io_n8n.vitest_config",
+        "n8n_io_n8n.client_oauth2",
+        "n8n_io_n8n.design_system"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 242.6476250111591,
+      "degraded": false
+    },
+    {
+      "query_id": "q16-en",
+      "language": "en",
+      "mode": "hybrid",
+      "effective_mode": "hybrid",
+      "negative": true,
+      "packages": [
+        "n8n_io_n8n.mcp_browser",
+        "n8n_io_n8n.syslog_client",
+        "rtk.shell_output_proxy",
+        "n8n_io_n8n.vitest_config",
+        "n8n_io_n8n.client_oauth2"
+      ],
+      "recall5": null,
+      "ndcg5": null,
+      "negative_strong": false,
+      "latency_ms": 247.3999169887975,
+      "degraded": false
+    }
+  ],
+  "targets_met_on_current_labels": false,
+  "quality_accepted": false,
+  "performance_scope": "actual corpus only; not a 1000-package load claim"
+}

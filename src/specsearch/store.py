@@ -9,7 +9,7 @@ import uuid
 from contextlib import contextmanager
 from pathlib import Path
 
-from .models import Filters, Package, now
+from .models import Filters, Package, digest, now
 
 
 def tokens(text):
@@ -129,6 +129,7 @@ class Store:
                 "packages": len(packages),
                 "documents": len(docs),
                 "provider": provider,
+                "corpus_digest": digest(sorted(p.record_id for p in packages)),
             }
             con.execute("INSERT INTO metadata VALUES('status',?)", (json.dumps(metadata),))
             con.commit()

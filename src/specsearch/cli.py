@@ -45,6 +45,8 @@ def main():
     serve.add_argument("--port", type=int, default=8030)
     serve.add_argument("--host", choices=["127.0.0.1", "0.0.0.0"], default="127.0.0.1")
     commands.add_parser("status")
+    calibrate = commands.add_parser("calibrate")
+    calibrate.add_argument("--queries", type=Path, default=Path("eval/queries.json"))
     evaluate = commands.add_parser("evaluate")
     evaluate.add_argument("--queries", type=Path, default=Path("eval/queries.json"))
     evaluate.add_argument("--split", choices=["dev", "test"], default="test")
@@ -63,7 +65,11 @@ def main():
         return 0
     embedder = Embedder(config.get("provider", {}), data / "cache.db")
     try:
-        service = SearchService(store, embedder, config.get("semantic_threshold"))
+        calibration_path = data / "calibration.json"
+        calibration = (
+            json.loads(calibration_path.read_text()) if calibration_path.exists() else None
+        )
+        service = SearchService(store, embedder, calibration)
         if args.command == "index":
             packages = [
                 Package.model_validate(p) for p in json.loads((data / "packages.json").read_text())
@@ -81,6 +87,11 @@ def main():
             print(json.dumps(result, ensure_ascii=False, indent=2))
         elif args.command == "status":
             print(json.dumps(service.status(), indent=2))
+        elif args.command == "calibrate":
+            from .evaluation import calibrate
+
+            atomic_json(calibration_path, calibrate(service, args.queries))
+            print(str(calibration_path))
         elif args.command == "evaluate":
             from .evaluation import evaluate
 
