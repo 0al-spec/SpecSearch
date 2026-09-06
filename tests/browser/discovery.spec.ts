@@ -6,6 +6,17 @@ for (const width of [1440, 390]) {
     const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
     await page.goto('/?source=candidates&q=rtk.shell_output_proxy');
     await expect(page.locator('#detail h2')).toHaveText('RTK Shell Output Compression Proxy');
+    await page.evaluate(()=>document.fonts.ready);
+    expect(await page.evaluate(()=>document.fonts.check('24px "Instrument Serif"'))).toBeTruthy();
+    expect(await page.locator('h1').evaluate(e=>getComputedStyle(e).fontFamily)).toContain('Instrument Serif');
+    expect(await page.locator('#search').evaluate(e=>getComputedStyle(e).borderRadius)).toBe('0px');
+    const bounds=await page.evaluate(()=>{
+      const rect=(selector:string)=>{const r=document.querySelector(selector)!.getBoundingClientRect();return {x:r.x,y:r.y,right:r.right,bottom:r.bottom};};
+      return {brand:rect('.brand'),status:rect('#status'),list:rect('aside'),detail:rect('article')};
+    });
+    expect(bounds.brand.right).toBeLessThanOrEqual(bounds.status.x);
+    if(width>760) expect(bounds.list.right).toBeLessThanOrEqual(bounds.detail.x);
+    else expect(bounds.list.bottom).toBeLessThanOrEqual(bounds.detail.y);
     await page.getByRole('button',{name:'Verify metadata'}).click();
     await expect(page.locator('.verification')).toHaveText('matched_metadata');
     await page.locator('.snippet a').first().click();
@@ -13,7 +24,7 @@ for (const width of [1440, 390]) {
     await page.getByRole('button',{name:'Close source field'}).click();
     await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBeTruthy();
     await expect.poll(()=>page.locator('img').evaluateAll(images=>images.every(i=>(i as HTMLImageElement).naturalWidth>0))).toBeTruthy();
-    await page.screenshot({path:`.data/screenshots/detail-${width}.png`,fullPage:false});
+    await page.screenshot({path:`.data/screenshots/shared-design-detail-${width}.png`,fullPage:false});
     await page.locator('#query').fill('HTTP');await page.locator('#mode').selectOption('lexical');
     await page.getByRole('button',{name:'Search',exact:true}).click();
     await expect(page.locator('#results .result')).not.toHaveCount(0);
@@ -21,7 +32,7 @@ for (const width of [1440, 390]) {
     await checks.nth(0).check();await expect(page.locator('#compare')).toHaveText('Compare (1)');
     await checks.nth(1).check();await expect(page.locator('#compare')).toHaveText('Compare (2)');
     await page.locator('#compare').click();await expect(page.locator('#comparison')).toBeVisible();
-    await page.screenshot({path:`.data/screenshots/compare-${width}.png`,fullPage:false});
+    await page.screenshot({path:`.data/screenshots/shared-design-compare-${width}.png`,fullPage:false});
     await page.getByRole('button',{name:'Close comparison'}).click();
     expect(errors).toEqual([]);
   });
