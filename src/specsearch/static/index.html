@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SpecSearch</title><link rel="stylesheet" href="/style.css"><script type="module" src="/app.js"></script></head>
+<body>
+<header><div class="brand"><span class="brandmark" aria-hidden="true">S</span><h1>SpecSearch</h1><span class="muted">Discovery</span></div><span id="status" role="status">Connecting</span></header>
+<main>
+<form id="search-form" class="searchbar"><label class="sr-only" for="query">Search intent</label><input id="query" name="q" type="search" placeholder="Intent, capability or package ID" maxlength="1000" autocomplete="off"><button id="search" type="submit" aria-label="Search" title="Search"></button></form>
+<div class="filters">
+<label>Collection<select id="source"><option value="registry">Registry</option><option value="candidates">Candidates</option><option value="all">Registry + candidates</option></select></label>
+<label>Retrieval<select id="mode"><option value="hybrid">Hybrid</option><option value="lexical">BM25</option><option value="vector">Vector</option></select></label>
+<label>Package<input id="package-filter" placeholder="Any package"></label>
+<label>Version<input id="version-filter" placeholder="Any version"></label>
+<label>License<input id="license-filter" placeholder="Any license"></label>
+<label>Declared capability<input id="capability-filter" placeholder="Any capability"></label>
+<label>Declared intent<input id="intent-filter" placeholder="Any intent"></label>
+<label class="check"><input id="inactive" type="checkbox">Include inactive</label>
+</div>
+<div id="notice" role="status"></div>
+<div class="workspace"><aside aria-label="Search results"><div class="list-heading"><h2>Results <span id="count">0</span></h2><button id="compare" disabled>Compare (0)</button></div><div id="results"></div></aside><article id="detail"><div class="empty"><h2>Package detail</h2><span class="muted">No package selected</span></div></article></div>
+</main>
+<dialog id="comparison"><div class="dialog-heading"><h2>Package comparison</h2><button id="close-comparison" aria-label="Close comparison" title="Close"></button></div><div id="comparison-content"></div></dialog>
+<footer>SpecSearch <span>Discovery only · No installation or publication</span></footer>
+</body></html>
