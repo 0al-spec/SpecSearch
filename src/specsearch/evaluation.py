@@ -97,7 +97,7 @@ def evaluate(service, path, split):
         calibration.get("provider_digest") != digest(index.get("provider"))
         or calibration.get("corpus_digest") != index.get("corpus_digest")
         or calibration.get("split") != "dev"
-        or not isinstance(calibration.get("value"), (int, float))
+        or type(calibration.get("value")) not in (int, float)
         or not math.isfinite(calibration["value"])
     ):
         raise ValueError("calibration_index_drift_or_invalid_threshold")

@@ -57,6 +57,8 @@ def test_calibration_and_evaluation_are_not_acceptance(tmp_path, package_factory
         ("corpus_digest", "different-corpus"),
         ("split", "test"),
         ("value", float("nan")),
+        ("value", True),
+        ("value", False),
     ):
         service.threshold = {**threshold, key: value}
         with pytest.raises(ValueError, match="calibration_index_drift"):
