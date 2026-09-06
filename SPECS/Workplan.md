@@ -6,7 +6,7 @@ cannot be inferred from agent-generated evaluation results.
 
 - [x] P1-T1 Product Contract and Evaluation Corpus (preparation; labels provisional)
 - [x] P1-T2 Safe Import and Search Documents
-- [ ] P1-T3 Lexical Search Baseline
+- [x] P1-T3 Lexical Search Baseline
 - [ ] P1-T4 Local Embedding Providers
 - [ ] P1-T5 Hybrid Search API and CLI
 - [ ] P1-T6 Discovery and Comparison UI
