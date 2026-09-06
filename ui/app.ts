@@ -1,7 +1,7 @@
 import {createElement, Search, X, Check, ExternalLink} from 'lucide';
 
 type Result = {record_id:string;package_id:string;version:string;name:string;summary:string;source:string;source_id:string;metadata_only:boolean;match_strength:string;ranking_score:number|null;snippets:{path:string;text:string}[]};
-type Package = {record_id:string;package_id:string;version:string;name:string;summary:string;source_kind:string;source_id:string;license:string|null;digest:string;details:Record<string,unknown>;evidence:unknown[];provenance:unknown};
+type Package = {record_id:string;package_id:string;version:string;name:string;summary:string;source_kind:string;source_id:string;license:string|null;digest:string;details:Record<string,unknown>;evidence:unknown[];provenance:unknown;documents:{fields:{path:string;text:string}[]}[]};
 const $ = <T extends HTMLElement = HTMLElement>(id:string) => document.getElementById(id) as T;
 const input = (id:string) => $<HTMLInputElement>(id).value;
 const el = (tag:string, text?:string, className?:string) => {const node=document.createElement(tag);if(text!==undefined)node.textContent=text;if(className)node.className=className;return node;};
@@ -30,6 +30,14 @@ function renderValue(value:unknown):HTMLElement{
 }
 function section(title:string,value:unknown){const node=el('section','', 'section');node.append(el('h3',title),renderValue(value));return node;}
 function disclosure(title:string,value:unknown){const node=el('details');node.append(el('summary',title),el('pre',JSON.stringify(value,null,2)));return node;}
+function showField(p:Package,path:string){
+ const dialog=document.createElement('dialog');dialog.setAttribute('aria-label','Source field');
+ const heading=el('div','', 'dialog-heading');const close=el('button') as HTMLButtonElement;close.setAttribute('aria-label','Close source field');close.append(createElement(X));close.onclick=()=>dialog.close();heading.append(el('h2','Source field'),close);
+ const field=p.documents.flatMap(d=>d.fields).find(f=>f.path===path);
+ const link=document.createElement('a');link.href=`/v1/packages/${encodeURIComponent(p.record_id)}?snapshot=${snapshot}`;link.target='_blank';link.rel='noopener';link.textContent='Source record';link.prepend(createElement(ExternalLink));
+ dialog.append(heading,el('code',path),section('Value',field?.text),el('div',p.digest,'identity'),link,disclosure('Declared evidence references',p.evidence));
+ dialog.onclose=()=>dialog.remove();document.body.append(dialog);dialog.showModal();
+}
 function updateCompare(){const button=$<HTMLButtonElement>('compare');button.textContent=`Compare (${compared.size})`;button.disabled=compared.size<2;}
 async function loadPackage(id:string){return await api(`/v1/packages/${encodeURIComponent(id)}?snapshot=${snapshot}`) as Package;}
 function renderResults(){
@@ -52,7 +60,7 @@ async function showDetail(id:string){
   const heading=el('div','', 'detail-heading');heading.append(logo(p.package_id),el('h2',p.name));detail.append(heading,el('div',`${p.package_id}@${p.version}`,'identity'),el('p',p.summary,'detail-summary'));
   const badges=el('div','', 'badges');badges.append(badge(p.source_kind,p.source_kind==='candidates'),badge(p.license||'License not declared'));detail.append(badges);
   const actions=el('div','', 'detail-actions');const verify=el('button','Verify metadata') as HTMLButtonElement;verify.prepend(createElement(Check));const outcome=el('span','','verification');verify.onclick=async()=>{verify.disabled=true;outcome.textContent='Checking';try{const r=await api('/v1/verify',{record_id:id,snapshot});outcome.textContent=r.status;}catch(e){outcome.textContent=String(e);}finally{verify.disabled=false;}};actions.append(verify,outcome);detail.append(actions);
-  const result=results.find(r=>r.record_id===id);if(result){const matches=el('section','', 'section');matches.append(el('h3','Matched source fields'));for(const s of result.snippets){const block=el('div','', 'snippet');block.append(el('p',s.text),el('code',s.path));matches.append(block);}detail.append(matches);}
+  const result=results.find(r=>r.record_id===id);if(result){const matches=el('section','', 'section');matches.append(el('h3','Matched source fields'));for(const s of result.snippets){const block=el('div','', 'snippet');const link=document.createElement('a');link.href='#source-field';link.textContent=s.path;link.onclick=e=>{e.preventDefault();showField(p,s.path);};block.append(el('p',s.text),link);matches.append(block);}detail.append(matches);}
   const specs=p.details.specs as Record<string,unknown>[]|undefined;
   if(specs){for(const spec of specs){detail.append(section('Purpose',spec.intent),section('Capabilities',spec.provides),section('Interfaces',spec.interfaces),section('Requirements',spec.requires),section('Constraints',spec.constraints),section('Side effects',spec.effects),section('Scope',spec.scope));}}
   else detail.append(section('Registry metadata',p.details.metadata));

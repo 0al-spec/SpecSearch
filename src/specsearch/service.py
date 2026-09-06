@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 import httpx
@@ -183,8 +184,18 @@ class SearchService:
             return {"status": "invalid", "observed_at": now()}
 
     def status(self):
+        status = self.store.status()
+        age = (
+            (
+                datetime.now(timezone.utc) - datetime.fromisoformat(status["created_at"])
+            ).total_seconds()
+            if status.get("created_at")
+            else None
+        )
         return {
-            **self.store.status(),
+            **status,
+            "age_seconds": age,
+            "stale": age is not None and age > 86400,
             "requests": self.requests,
             "degraded_requests": self.degraded_count,
             "last_latency_ms": self.last_latency_ms,

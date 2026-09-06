@@ -56,3 +56,45 @@ def test_lmstudio_index_validation(tmp_path):
     )
     with pytest.raises(EmbeddingError):
         embedder.raw(["hello"])
+
+
+def test_lmstudio_requires_loaded_context_and_binds_artifact(tmp_path):
+    artifact = tmp_path / "model.gguf"
+    artifact.write_bytes(b"fixture artifact, not a real model")
+    context = [512]
+
+    def handler(request):
+        if request.url.path == "/api/v0/models":
+            return httpx.Response(
+                200,
+                json={
+                    "data": [
+                        {
+                            "id": "nomic",
+                            "type": "embeddings",
+                            "loaded_context_length": context[0],
+                            "max_context_length": 2048,
+                        }
+                    ]
+                },
+            )
+        return httpx.Response(200, json={"data": [{"index": 0, "embedding": [1, 2]}]})
+
+    embedder = Embedder(
+        {
+            "kind": "lmstudio",
+            "url": "http://localhost:1234",
+            "model": "nomic",
+            "dimension": 2,
+            "artifact_path": str(artifact),
+        },
+        tmp_path / "cache.db",
+        httpx.Client(transport=httpx.MockTransport(handler)),
+    )
+    with pytest.raises(EmbeddingError, match="context"):
+        embedder.identity()
+    context[0] = 2048
+    before = embedder.identity()
+    assert embedder.documents(["hello"]).shape == (1, 2)
+    artifact.write_bytes(b"different fixture artifact")
+    assert embedder.identity() != before
