@@ -6,7 +6,7 @@ import os
 import stat
 import tempfile
 from pathlib import Path, PurePosixPath
-from urllib.parse import quote, urlparse
+from urllib.parse import quote, urljoin, urlparse
 
 import httpx
 import yaml
@@ -211,6 +211,13 @@ def allowed_base(url: str):
 
 def registry_json(client, base, endpoint):
     with client.stream("GET", allowed_base(base) + endpoint) as response:
+        current = allowed_base(base) + endpoint
+        if (
+            response.status_code in (301, 302, 307, 308)
+            and not endpoint.endswith("/")
+            and urljoin(current, response.headers.get("location", "")) == current + "/"
+        ):
+            return registry_json(client, base, endpoint + "/")
         response.raise_for_status()
         data = bytearray()
         for chunk in response.iter_bytes():

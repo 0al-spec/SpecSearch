@@ -1,0 +1,32 @@
+{
+  "apiVersion": "specpm.registry/v0",
+  "kind": "RemoteRegistryStatus",
+  "registry": {
+    "api_version": "v0",
+    "authority": "metadata_only",
+    "capability_count": 104,
+    "implementation": {
+      "build": {
+        "number": "local",
+        "revision": "8a5ce3dece3d18bf8f601a5a599520bd520c7839",
+        "revision_short": "8a5ce3dece3d"
+      },
+      "name": "SpecPM",
+      "version": "0.2.0"
+    },
+    "intent_count": 26,
+    "package_count": 9,
+    "profile": "public_static_index",
+    "provenance_receipt_count": 10,
+    "read_only": true,
+    "relation_count": 3,
+    "supportedFeatures": [
+      "package_sets",
+      "package_relations",
+      "search_result_scope"
+    ],
+    "version_count": 10
+  },
+  "schemaVersion": 1,
+  "status": "ok"
+}

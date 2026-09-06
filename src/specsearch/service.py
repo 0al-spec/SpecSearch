@@ -6,10 +6,11 @@ from pathlib import Path
 
 import httpx
 import numpy as np
+import yaml
 
 from .embeddings import EmbeddingError
 from .ingest import local_package, registry_json, registry_package
-from .models import SearchRequest, now
+from .models import SearchRequest, digest, now
 from .store import Store, collapse, predicate, tokens
 
 
@@ -103,8 +104,18 @@ class SearchService:
                     break
             cosine = next((h["score"] for h in vector if h["record_id"] == rid), None)
             strength = "exact" if exact else "uncalibrated"
-            if not exact and cosine is not None and self.threshold is not None:
-                strength = "strong" if cosine >= self.threshold else "weak"
+            calibration = self.threshold
+            if (
+                not exact
+                and cosine is not None
+                and isinstance(calibration, dict)
+                and calibration.get("provider_digest") == digest(metadata["provider"])
+                and calibration.get("corpus_digest") == metadata.get("corpus_digest")
+                and calibration.get("split") == "dev"
+            ):
+                strength = "strong" if cosine >= calibration["value"] else "weak"
+                if calibration.get("labels_status") != "confirmed":
+                    strength += "_provisional"
             results.append(
                 {
                     "record_id": rid,
@@ -168,7 +179,7 @@ class SearchService:
             }
         except (OSError, httpx.HTTPError):
             return {"status": "unavailable", "observed_at": now()}
-        except (ValueError, KeyError, TypeError):
+        except (ValueError, KeyError, TypeError, yaml.YAMLError):
             return {"status": "invalid", "observed_at": now()}
 
     def status(self):
