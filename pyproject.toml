@@ -19,7 +19,7 @@ specsearch = "specsearch.cli:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-specsearch = ["static/*"]
+specsearch = ["static/*", "static/logos/*"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

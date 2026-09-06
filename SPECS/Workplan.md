@@ -9,7 +9,7 @@ cannot be inferred from agent-generated evaluation results.
 - [x] P1-T3 Lexical Search Baseline
 - [x] P1-T4 Local Embedding Providers
 - [x] P1-T5 Hybrid Search API and CLI
-- [ ] P1-T6 Discovery and Comparison UI
+- [x] P1-T6 Discovery and Comparison UI
 - [ ] P1-T7 Retrieval Evaluation and Hardening
 - [ ] P1-T8 Docker Delivery and MVP Exit
 

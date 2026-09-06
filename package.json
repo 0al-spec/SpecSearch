@@ -1,0 +1,9 @@
+{
+  "name": "specsearch-ui", "private": true, "type": "module",
+  "scripts": {
+    "build": "tsc --noEmit && esbuild ui/app.ts --bundle --minify --outfile=src/specsearch/static/app.js",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {"lucide": "https://registry.npmjs.org/lucide/-/lucide-0.577.0.tgz"},
+  "devDependencies": {"typescript": "5.9.3", "esbuild": "0.25.12", "@playwright/test": "1.61.1"}
+}
