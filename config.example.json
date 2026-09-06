@@ -1,0 +1,5 @@
+{
+  "data_dir": ".data/ollama",
+  "provider": {"kind": "ollama", "url": "http://127.0.0.1:11434", "model": "nomic-embed-text:latest", "dimension": 768},
+  "sources": []
+}
