@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "specsearch"
+version = "0.1.0"
+description = "Read-only hybrid discovery for SpecPM packages"
+requires-python = ">=3.12"
+dependencies = ["fastapi>=0.115,<1", "uvicorn>=0.30,<1", "httpx>=0.27,<1", "numpy>=2,<3", "PyYAML>=6,<7", "pydantic>=2,<3", "specpm @ git+https://github.com/0al-spec/SpecPM.git@8a5ce3dece3d18bf8f601a5a599520bd520c7839"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-cov>=5", "ruff>=0.9"]
+
+[project.scripts]
+specsearch = "specsearch.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+specsearch = ["static/*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]

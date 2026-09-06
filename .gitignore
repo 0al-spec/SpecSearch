@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.coverage
+*.egg-info/
+.data/
+config.local.json
+node_modules/
+src/specsearch/static/app.js
+dist/

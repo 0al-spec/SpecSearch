@@ -1,0 +1,427 @@
+{
+  "version": 1,
+  "labels_status": "provisional",
+  "reviewer": null,
+  "queries": [
+    {
+      "id": "q00-ru",
+      "group": "q00",
+      "language": "ru",
+      "split": "dev",
+      "query": "Сократить вывод команд для AI агента",
+      "relevance": {
+        "rtk.shell_output_proxy": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q00-en",
+      "group": "q00",
+      "language": "en",
+      "split": "dev",
+      "query": "Reduce shell output for an AI coding agent",
+      "relevance": {
+        "rtk.shell_output_proxy": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q01-ru",
+      "group": "q01",
+      "language": "ru",
+      "split": "dev",
+      "query": "Локальный агент для правки кода",
+      "relevance": {
+        "openai.codex": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q01-en",
+      "group": "q01",
+      "language": "en",
+      "split": "dev",
+      "query": "Local agent that edits repository code",
+      "relevance": {
+        "openai.codex": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q02-ru",
+      "group": "q02",
+      "language": "ru",
+      "split": "dev",
+      "query": "HTTP клиент для браузера и Node",
+      "relevance": {
+        "axios.http_client": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q02-en",
+      "group": "q02",
+      "language": "en",
+      "split": "dev",
+      "query": "HTTP client for browser and Node",
+      "relevance": {
+        "axios.http_client": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q03-ru",
+      "group": "q03",
+      "language": "ru",
+      "split": "dev",
+      "query": "Запустить полностью проверяющий узел Bitcoin",
+      "relevance": {
+        "bitcoin.core.fullnode": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q03-en",
+      "group": "q03",
+      "language": "en",
+      "split": "dev",
+      "query": "Run a fully validating Bitcoin node",
+      "relevance": {
+        "bitcoin.core.fullnode": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q04-ru",
+      "group": "q04",
+      "language": "ru",
+      "split": "dev",
+      "query": "Визуальная автоматизация рабочих процессов",
+      "relevance": {
+        "n8n.platform": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q04-en",
+      "group": "q04",
+      "language": "en",
+      "split": "dev",
+      "query": "Visual workflow automation",
+      "relevance": {
+        "n8n.platform": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q05-ru",
+      "group": "q05",
+      "language": "ru",
+      "split": "test",
+      "query": "Переписать shell команду в компактный вывод",
+      "relevance": {
+        "rtk.shell_output_proxy": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q05-en",
+      "group": "q05",
+      "language": "en",
+      "split": "test",
+      "query": "Rewrite shell commands for compact output",
+      "relevance": {
+        "rtk.shell_output_proxy": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q06-ru",
+      "group": "q06",
+      "language": "ru",
+      "split": "test",
+      "query": "Встроить coding agent через TypeScript SDK",
+      "relevance": {
+        "openai.codex": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q06-en",
+      "group": "q06",
+      "language": "en",
+      "split": "test",
+      "query": "Embed a coding agent through a TypeScript SDK",
+      "relevance": {
+        "openai.codex": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q07-ru",
+      "group": "q07",
+      "language": "ru",
+      "split": "test",
+      "query": "Отменять HTTP запросы и настраивать таймауты",
+      "relevance": {
+        "axios.http_client": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q07-en",
+      "group": "q07",
+      "language": "en",
+      "split": "test",
+      "query": "Cancel HTTP requests and configure timeouts",
+      "relevance": {
+        "axios.http_client": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q08-ru",
+      "group": "q08",
+      "language": "ru",
+      "split": "test",
+      "query": "Управлять кошельком узла через RPC",
+      "relevance": {
+        "bitcoin.core.fullnode": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q08-en",
+      "group": "q08",
+      "language": "en",
+      "split": "test",
+      "query": "Manage a node wallet through RPC",
+      "relevance": {
+        "bitcoin.core.fullnode": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q09-ru",
+      "group": "q09",
+      "language": "ru",
+      "split": "test",
+      "query": "Настроить AI инструменты платформы автоматизации",
+      "relevance": {
+        "n8n.platform": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q09-en",
+      "group": "q09",
+      "language": "en",
+      "split": "test",
+      "query": "Configure AI tools for a workflow platform",
+      "relevance": {
+        "n8n.platform": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q10-ru",
+      "group": "q10",
+      "language": "ru",
+      "split": "test",
+      "query": "rtk.shell_output_proxy",
+      "relevance": {
+        "rtk.shell_output_proxy": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q10-en",
+      "group": "q10",
+      "language": "en",
+      "split": "test",
+      "query": "rtk.shell_output_proxy",
+      "relevance": {
+        "rtk.shell_output_proxy": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q11-ru",
+      "group": "q11",
+      "language": "ru",
+      "split": "test",
+      "query": "openai.codex",
+      "relevance": {
+        "openai.codex": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q11-en",
+      "group": "q11",
+      "language": "en",
+      "split": "test",
+      "query": "openai.codex",
+      "relevance": {
+        "openai.codex": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q12-ru",
+      "group": "q12",
+      "language": "ru",
+      "split": "dev",
+      "query": "axios.http_client",
+      "relevance": {
+        "axios.http_client": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q12-en",
+      "group": "q12",
+      "language": "en",
+      "split": "dev",
+      "query": "axios.http_client",
+      "relevance": {
+        "axios.http_client": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q13-ru",
+      "group": "q13",
+      "language": "ru",
+      "split": "test",
+      "query": "bitcoin.core.fullnode",
+      "relevance": {
+        "bitcoin.core.fullnode": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q13-en",
+      "group": "q13",
+      "language": "en",
+      "split": "test",
+      "query": "bitcoin.core.fullnode",
+      "relevance": {
+        "bitcoin.core.fullnode": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q14-ru",
+      "group": "q14",
+      "language": "ru",
+      "split": "dev",
+      "query": "n8n.platform",
+      "relevance": {
+        "n8n.platform": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q14-en",
+      "group": "q14",
+      "language": "en",
+      "split": "dev",
+      "query": "n8n.platform",
+      "relevance": {
+        "n8n.platform": 2
+      },
+      "negative": false
+    },
+    {
+      "id": "q15-ru",
+      "group": "q15",
+      "language": "ru",
+      "split": "dev",
+      "query": "Симуляция ядерного реактора",
+      "relevance": {},
+      "negative": true
+    },
+    {
+      "id": "q15-en",
+      "group": "q15",
+      "language": "en",
+      "split": "dev",
+      "query": "Simulate a nuclear reactor",
+      "relevance": {},
+      "negative": true
+    },
+    {
+      "id": "q16-ru",
+      "group": "q16",
+      "language": "ru",
+      "split": "dev",
+      "query": "Драйвер микроскопа для USB",
+      "relevance": {},
+      "negative": true
+    },
+    {
+      "id": "q16-en",
+      "group": "q16",
+      "language": "en",
+      "split": "dev",
+      "query": "USB microscope device driver",
+      "relevance": {},
+      "negative": true
+    },
+    {
+      "id": "q17-ru",
+      "group": "q17",
+      "language": "ru",
+      "split": "test",
+      "query": "Распознавание опухолей на МРТ",
+      "relevance": {},
+      "negative": true
+    },
+    {
+      "id": "q17-en",
+      "group": "q17",
+      "language": "en",
+      "split": "test",
+      "query": "Detect tumors in MRI scans",
+      "relevance": {},
+      "negative": true
+    },
+    {
+      "id": "q18-ru",
+      "group": "q18",
+      "language": "ru",
+      "split": "test",
+      "query": "Прошивка для управления спутником",
+      "relevance": {},
+      "negative": true
+    },
+    {
+      "id": "q18-en",
+      "group": "q18",
+      "language": "en",
+      "split": "test",
+      "query": "Satellite attitude control firmware",
+      "relevance": {},
+      "negative": true
+    },
+    {
+      "id": "q19-ru",
+      "group": "q19",
+      "language": "ru",
+      "split": "test",
+      "query": "Расчет орбит экзопланет",
+      "relevance": {},
+      "negative": true
+    },
+    {
+      "id": "q19-en",
+      "group": "q19",
+      "language": "en",
+      "split": "test",
+      "query": "Calculate exoplanet orbits",
+      "relevance": {},
+      "negative": true
+    }
+  ]
+}
