@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import hashlib
+import os
 import sqlite3
 import time
 from pathlib import Path
+from urllib.parse import urlparse
 
 import httpx
 import numpy as np
@@ -35,7 +37,10 @@ def chunks(text, limit=1024):
 
 
 def normalized(values, dimension):
-    array = np.asarray(values, dtype=np.float32)
+    try:
+        array = np.asarray(values, dtype=np.float32)
+    except (TypeError, ValueError, OverflowError) as error:
+        raise EmbeddingError("invalid_vector_shape_or_values") from error
     if array.ndim != 2 or array.shape[1] != dimension or not np.isfinite(array).all():
         raise EmbeddingError("invalid_vector_shape_or_values")
     norms = np.linalg.norm(array, axis=1, keepdims=True)
@@ -51,8 +56,11 @@ class Embedder:
         if self.kind not in ("ollama", "lmstudio"):
             raise EmbeddingError("unknown_provider")
         self.base = allowed_base(config.get("url", "http://127.0.0.1:11434"))
-        if not self.base.startswith(
-            ("http://127.0.0.1:", "http://localhost:", "http://host.docker.internal:")
+        if urlparse(self.base).hostname not in (
+            "127.0.0.1",
+            "localhost",
+            "::1",
+            "host.docker.internal",
         ):
             raise EmbeddingError("local_embedding_provider_required")
         self.model = config.get("model", "nomic-embed-text:latest")
@@ -61,6 +69,7 @@ class Embedder:
         cache.parent.mkdir(parents=True, exist_ok=True)
         self.client = client or httpx.Client(timeout=30, follow_redirects=False, trust_env=False)
         self.owned = client is None
+        self._artifact_cache = None
         with sqlite3.connect(cache) as con:
             con.execute("CREATE TABLE IF NOT EXISTS embeddings(key TEXT PRIMARY KEY, data BLOB)")
 
@@ -85,13 +94,18 @@ class Embedder:
 
     def identity(self):
         if self.kind == "ollama":
-            models = self.request("GET", "/api/tags")["models"]
+            models = self.model_list("/api/tags", "models", "name")
             match = next((m for m in models if m["name"] == self.model), None)
-            if not match or "embedding" not in match.get("capabilities", ["embedding"]):
+            capabilities = match.get("capabilities", ["embedding"]) if match else []
+            if not isinstance(capabilities, list):
+                raise EmbeddingError("invalid_provider_response")
+            if not match or "embedding" not in capabilities:
                 raise EmbeddingError("embedding_model_missing")
-            artifact = match["digest"]
+            artifact = match.get("digest")
+            if not isinstance(artifact, str) or not artifact:
+                raise EmbeddingError("invalid_provider_response")
         else:
-            models = self.request("GET", "/api/v0/models")["data"]
+            models = self.model_list("/api/v0/models", "data", "id")
             match = next((m for m in models if m["id"] == self.model), None)
             if not match or match.get("type") != "embeddings":
                 raise EmbeddingError("embedding_model_missing")
@@ -99,9 +113,7 @@ class Embedder:
             if type(context) is not int or context < 1100:
                 raise EmbeddingError("embedding_context_not_confirmed")
             # LM Studio's model ID alone does not bind the served GGUF variant.
-            path = Path(self.config["artifact_path"])
-            with path.open("rb") as file:
-                artifact = hashlib.file_digest(file, "sha256").hexdigest()
+            artifact = self.artifact_digest()
             artifact = digest(
                 [
                     artifact,
@@ -116,6 +128,33 @@ class Embedder:
             "preprocessing": PREPROCESSING,
         }
 
+    def model_list(self, endpoint, key, identifier):
+        payload = self.request("GET", endpoint)
+        models = payload.get(key) if isinstance(payload, dict) else None
+        if not isinstance(models, list) or any(
+            not isinstance(model, dict) or not isinstance(model.get(identifier), str)
+            for model in models
+        ):
+            raise EmbeddingError("invalid_provider_response")
+        return models
+
+    def artifact_digest(self):
+        path = Path(self.config["artifact_path"])
+
+        def identity(info):
+            return (info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns, info.st_ctime_ns)
+
+        with path.open("rb") as file:
+            before = identity(os.fstat(file.fileno()))
+            if self._artifact_cache is not None and self._artifact_cache[0] == before:
+                artifact = self._artifact_cache[1]
+            else:
+                artifact = hashlib.file_digest(file, "sha256").hexdigest()
+            if identity(os.fstat(file.fileno())) != before or identity(path.stat()) != before:
+                raise EmbeddingError("model_changed_during_hash")
+        self._artifact_cache = (before, artifact)
+        return artifact
+
     def raw(self, texts):
         if self.kind == "ollama":
             payload = self.request(
@@ -128,15 +167,25 @@ class Embedder:
                     "options": {"num_ctx": 2048},
                 },
             )
-            values = payload["embeddings"]
+            values = payload.get("embeddings") if isinstance(payload, dict) else None
         else:
             payload = self.request(
                 "POST", "/v1/embeddings", json={"model": self.model, "input": texts}
             )
-            data = sorted(payload["data"], key=lambda row: row["index"])
+            data = payload.get("data") if isinstance(payload, dict) else None
+            if not isinstance(data, list) or any(
+                not isinstance(row, dict)
+                or type(row.get("index")) is not int
+                or "embedding" not in row
+                for row in data
+            ):
+                raise EmbeddingError("invalid_provider_response")
+            data = sorted(data, key=lambda row: row["index"])
             if [row["index"] for row in data] != list(range(len(texts))):
                 raise EmbeddingError("invalid_embedding_indices")
             values = [row["embedding"] for row in data]
+        if not isinstance(values, list) or any(not isinstance(row, list) for row in values):
+            raise EmbeddingError("invalid_provider_response")
         if len(values) != len(texts):
             raise EmbeddingError("invalid_embedding_count")
         return normalized(values, self.dimension)

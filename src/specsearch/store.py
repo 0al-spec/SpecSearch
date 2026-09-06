@@ -13,7 +13,8 @@ from .models import Filters, Package, digest, now
 
 
 def tokens(text):
-    expanded = re.sub(r"([a-z])([A-Z])", r"\1 \2", text)
+    expanded = re.sub(r"([A-Z]+)([A-Z][a-z])", r"\1 \2", text)
+    expanded = re.sub(r"([a-z])([A-Z])", r"\1 \2", expanded)
     return re.findall(r"[^\W_]+", expanded.casefold(), re.UNICODE)
 
 
@@ -58,10 +59,18 @@ class Store:
 
     @contextmanager
     def connect(self, snapshot=None):
-        snapshot = snapshot or self.active()
-        if not re.fullmatch(r"[0-9a-f]{32}", snapshot):
+        snapshot = self.active() if snapshot is None else snapshot
+        if not isinstance(snapshot, str) or not re.fullmatch(r"[0-9a-f]{32}", snapshot):
             raise ValueError("invalid_snapshot")
-        con = sqlite3.connect(f"file:{self.root / (snapshot + '.db')}?mode=ro", uri=True)
+        path = self.root / (snapshot + ".db")
+        if not path.is_file():
+            raise LookupError("snapshot_not_found")
+        try:
+            con = sqlite3.connect(f"{path.resolve().as_uri()}?mode=ro", uri=True)
+        except sqlite3.OperationalError:
+            if not path.exists():
+                raise LookupError("snapshot_not_found") from None
+            raise
         con.row_factory = sqlite3.Row
         try:
             yield con
@@ -77,6 +86,7 @@ class Store:
         snapshot = uuid.uuid4().hex
         path = self.root / f"{snapshot}.db"
         con = sqlite3.connect(path)
+        publication_started = False
         try:
             con.executescript("""
                 CREATE TABLE packages(id TEXT PRIMARY KEY, source_id TEXT, kind TEXT,
@@ -144,11 +154,14 @@ class Store:
             temporary.write_text(json.dumps({"snapshot": snapshot}))
             with temporary.open("rb") as file:
                 os.fsync(file.fileno())
+            # An interrupt can arrive after replace succeeds but before it returns.
+            publication_started = True
             os.replace(temporary, self.root / "active.json")
             return metadata
         except BaseException:
             con.close()
-            path.unlink(missing_ok=True)
+            if not publication_started:
+                path.unlink(missing_ok=True)
             raise
 
     def status(self):

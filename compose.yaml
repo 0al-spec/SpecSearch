@@ -16,7 +16,7 @@ services:
     security_opt: [no-new-privileges:true]
     mem_limit: 2g
     healthcheck:
-      test: [CMD, /app/.venv/bin/python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8030/v1/status',timeout=5)"]
+      test: [CMD, /app/.venv/bin/python, -c, "import json,sys,urllib.request; status=json.load(urllib.request.urlopen('http://127.0.0.1:8030/v1/status',timeout=5)); sys.exit(0 if status.get('snapshot') else 1)"]
       interval: 15s
       timeout: 5s
       retries: 3

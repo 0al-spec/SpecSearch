@@ -158,7 +158,9 @@ class SearchService:
         old = self.store.package(rid, snapshot)
         try:
             if old.source_kind == "candidates":
-                fresh = local_package(Path(old.locator["path"]), old.source_id)
+                root = Path(old.locator["path"])
+                root.lstat()  # Missing sources are unavailable, not malformed packages.
+                fresh = local_package(root, old.source_id)
             else:
                 base = old.locator["registry"]
                 with httpx.Client(timeout=15, follow_redirects=False, trust_env=False) as client:

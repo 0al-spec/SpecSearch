@@ -6,7 +6,7 @@ const $ = <T extends HTMLElement = HTMLElement>(id:string) => document.getElemen
 const input = (id:string) => $<HTMLInputElement>(id).value;
 const el = (tag:string, text?:string, className?:string) => {const node=document.createElement(tag);if(text!==undefined)node.textContent=text;if(className)node.className=className;return node;};
 let snapshot='', results:Result[]=[], selected='', searchToken=0, detailToken=0;
-const compared = new Map<string,Package>();
+const compared = new Map<string,{package?:Package}>();
 const params = new URLSearchParams(location.search);
 $<HTMLInputElement>('query').value=params.get('q')||'';
 if(['registry','candidates','all'].includes(params.get('source')||''))$<HTMLSelectElement>('source').value=params.get('source')!;
@@ -38,7 +38,7 @@ function showField(p:Package,path:string){
  dialog.append(heading,el('code',path),section('Value',field?.text),el('div',p.digest,'identity'),link,disclosure('Declared evidence references',p.evidence));
  dialog.onclose=()=>dialog.remove();document.body.append(dialog);dialog.showModal();
 }
-function updateCompare(){const button=$<HTMLButtonElement>('compare');button.textContent=`Compare (${compared.size})`;button.disabled=compared.size<2;}
+function updateCompare(){const button=$<HTMLButtonElement>('compare');button.textContent=`Compare (${compared.size})`;button.disabled=compared.size<2||[...compared.values()].some(slot=>!slot.package);}
 async function loadPackage(id:string){return await api(`/v1/packages/${encodeURIComponent(id)}?snapshot=${snapshot}`) as Package;}
 function renderResults(){
  $('results').replaceChildren();$('count').textContent=String(results.length);
@@ -50,7 +50,16 @@ function renderResults(){
   open.onclick=()=>showDetail(result.record_id);row.append(open);
   const badges=el('div','', 'badges');badges.append(badge(result.source,result.source==='candidates'),badge(result.match_strength));if(result.metadata_only)badges.append(badge('Metadata only'));row.append(badges);
   const bottom=el('div','', 'result-bottom');const label=el('label');const check=document.createElement('input');check.type='checkbox';check.checked=compared.has(result.record_id);check.setAttribute('aria-label',`Compare ${result.package_id}`);
-  check.onchange=async()=>{if(check.checked){if(compared.size>=3){check.checked=false;$('notice').textContent='Comparison limit: 3 packages';return;}try{compared.set(result.record_id,await loadPackage(result.record_id));}catch(e){check.checked=false;$('notice').textContent=String(e);}}else compared.delete(result.record_id);updateCompare();};
+  check.onchange=async()=>{
+   const id=result.record_id;
+   if(!check.checked){compared.delete(id);updateCompare();return;}
+   if(compared.size>=3){check.checked=false;$('notice').textContent='Comparison limit: 3 packages';return;}
+   // Reserve a slot before fetching; its identity invalidates cancelled or replaced requests.
+   const slot:{package?:Package}={};compared.set(id,slot);updateCompare();
+   try{const p=await loadPackage(id);if(compared.get(id)!==slot)return;slot.package=p;}
+   catch(e){if(compared.get(id)!==slot)return;compared.delete(id);renderResults();$('notice').textContent=String(e);}
+   updateCompare();
+  };
   label.append(check,document.createTextNode('Compare'));bottom.append(label,el('span',result.ranking_score===null?'Exact ID':`RRF ${result.ranking_score.toFixed(4)}`));row.append(bottom);$('results').append(row);
  }
 }
@@ -69,7 +78,7 @@ async function showDetail(id:string){
  }catch(e){if(token===detailToken)$('detail').replaceChildren(el('div',String(e),'empty'));}
 }
 async function search(){
- const query=input('query').trim();if(!query)return;const token=++searchToken;++detailToken;compared.clear();updateCompare();selected='';
+ const query=input('query').trim();if(!query)return;const token=++searchToken;++detailToken;compared.clear();updateCompare();selected='';results=[];renderResults();
  $('notice').textContent='Searching';$<HTMLButtonElement>('search').disabled=true;
  const filters:Record<string,unknown>={source:input('source'),include_inactive:$<HTMLInputElement>('inactive').checked};
  for(const key of ['package','version','license','capability','intent'])if(input(`${key}-filter`).trim())filters[key]=input(`${key}-filter`).trim();
@@ -81,8 +90,16 @@ async function search(){
  finally{if(token===searchToken)$<HTMLButtonElement>('search').disabled=false;}
 }
 $('search-form').onsubmit=e=>{e.preventDefault();void search();};
-$('compare').onclick=()=>{const table=document.createElement('table');const head=el('tr');head.append(el('th',''));for(const p of compared.values())head.append(el('th',p.name));table.append(head);
- for(const key of ['package_id','version','source_kind','license','intent','provides','interfaces','requires','constraints']){const row=el('tr');row.append(el('th',key));for(const p of compared.values()){const cell=el('td');const value=key in p?(p as unknown as Record<string,unknown>)[key]:(p.details.specs as Record<string,unknown>[]|undefined)?.map(s=>s[key]);cell.append(renderValue(value));row.append(cell);}table.append(row);}
+function comparisonValue(p:Package,key:string):unknown{
+ if(key in p)return (p as unknown as Record<string,unknown>)[key];
+ const specs=p.details.specs as Record<string,unknown>[]|undefined;
+ if(specs)return specs.map(s=>s[key]);
+ const metadata=p.details.metadata as Record<string,unknown>|undefined;
+ const fields:Record<string,string>={intent:'provided_intents',provides:'provided_capabilities',requires:'required_capabilities'};
+ return metadata?.[fields[key]||key];
+}
+$('compare').onclick=()=>{const packages=[...compared.values()].flatMap(slot=>slot.package?[slot.package]:[]);const table=document.createElement('table');const head=el('tr');head.append(el('th',''));for(const p of packages)head.append(el('th',p.name));table.append(head);
+ for(const key of ['package_id','version','source_kind','license','intent','provides','interfaces','requires','constraints']){const row=el('tr');row.append(el('th',key));for(const p of packages){const cell=el('td');cell.append(renderValue(comparisonValue(p,key)));row.append(cell);}table.append(row);}
  $('comparison-content').replaceChildren(table);$<HTMLDialogElement>('comparison').showModal();};
 $('close-comparison').onclick=()=>$<HTMLDialogElement>('comparison').close();
 void api('/v1/status').then(s=>{$('status').textContent=`${s.packages} packages · ${s.provider?.model||'BM25'} · Local`;}).catch(e=>{$('status').textContent=String(e);});

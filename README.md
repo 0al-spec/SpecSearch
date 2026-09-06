@@ -116,6 +116,11 @@ not exhaustive maintainer judgments. Do not call quality accepted until reviewed
 digests. Test evaluates, never tunes. Provisional thresholds are visibly labeled.
 
 Reports: [evaluation](SPECS/reports/P1-T7.md), [workplan](SPECS/Workplan.md).
+The review follow-up evaluation in `SPECS/reports/review-ollama-test.json`
+supersedes the original combined language metrics: exact-ID lookup is now
+reported separately and never contributes to RU/EN quality gates. The frozen
+query corpus itself is unchanged. Calibration from another corpus/model or a
+changing snapshot aborts evaluation rather than producing a passing report.
 Ollama meets current numeric test targets; LM Studio fails the negative strong
 match target. This is not model superiority or population reliability evidence.
 The synthetic 1000-package test measures load only, with a warm embedding cache.
