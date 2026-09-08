@@ -13,6 +13,7 @@ import yaml
 from specpm.core import validate_package, validate_remote_registry_payload
 
 from .models import Document, FieldText, Package, digest, now
+from .upstream import manifest_upstream, normalize_upstream
 
 MAX_FILE = 2 * 1024 * 1024
 MAX_TOTAL = 32 * 1024 * 1024
@@ -175,6 +176,7 @@ def local_package(root: Path, source_id: str) -> Package:
         name=meta["name"],
         summary=meta.get("summary", ""),
         license=meta.get("license"),
+        upstream=manifest_upstream(manifest),
         digest=checksum,
         capabilities=validation["capabilities"],
         intents=validation["intents"],
@@ -236,6 +238,11 @@ def registry_package(client, base, source_id, pid, version, status):
     item = payload["package"]
     if item["package_id"] != pid or item["version"] != version:
         raise ImportFailure("registry_identity_mismatch")
+    upstream = None
+    if "upstream" in item:
+        upstream = normalize_upstream(item["upstream"])
+        if upstream is None:
+            raise ImportFailure("invalid_upstream")
     checksum = digest(item)
     rid = digest([source_id, pid, version, checksum])
     doc_fields = fields(
@@ -278,6 +285,7 @@ def registry_package(client, base, source_id, pid, version, status):
         name=item["name"],
         summary=item.get("summary", ""),
         license=item.get("license"),
+        upstream=upstream,
         digest=checksum,
         metadata_only=True,
         capabilities=item.get("provided_capabilities", []),
