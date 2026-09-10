@@ -35,6 +35,8 @@ INVALID = [
             "a..b",
             "-host.org",
             "example.123",
+            "example.0x",
+            "xn--a",
             "127.1",
             "0x7f.0.0.1",
             "a" * 254,
