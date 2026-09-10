@@ -23,7 +23,7 @@ for(const width of [1440,390])test(`upstream survives discovery and comparison a
  await page.screenshot({path:`.data/screenshots/upstream-comparison-${width}.png`});
 });
 
-for(const url of ['javascript:alert(1)','https://user:password@example.org/repo','https://example.org/repo?secret=x','https://example.org/\\evil'])test(`unsafe upstream stays inert: ${url}`,async({page})=>{
+for(const url of ['javascript:alert(1)','https://user:password@example.org/repo','https://example.org/repo?secret=x','https://example.org/\\evil','https://example.com%2Frepo/path','https://example.org/\u0080','https://example.org/\u202e'])test(`unsafe upstream stays inert: ${url}`,async({page})=>{
  await page.route('**/v1/status',r=>r.fulfill({json:{packages:1}}));
  const p={record_id:'a',package_id:'a',version:'1',name:'A',summary:'A',source_kind:'registry',source:'registry',license:'MIT',details:{},documents:[],evidence:[],provenance:{},upstream:{url,revision:'<img src=x onerror=alert(1)>'},ranking_score:null,match_strength:'exact',snippets:[]};
  await page.route('**/v1/search',r=>r.fulfill({json:{snapshot:'test',mode:'lexical',latency_ms:1,results:[p]}}));

@@ -24,6 +24,22 @@ ARTIFACT = {
     "revision": UPSTREAM["revision"],
 }
 INVALID = [
+    *[{"url": "https://example.org/" + char} for char in ("\u0080", "\u009f", "\u200b", "\u202e")],
+    *[{"url": URL, "revision": "v" + char} for char in ("\u0080", "\u009f", "\u200b", "\u202e")],
+    *[
+        {"url": f"https://{host}/repo"}
+        for host in (
+            "example.com%2Frepo",
+            "example.com%40evil",
+            "bad^host",
+            "a..b",
+            "-host.org",
+            "example.123",
+            "127.1",
+            "0x7f.0.0.1",
+            "a" * 254,
+        )
+    ],
     None,
     "https://example.org/repository",
     [],

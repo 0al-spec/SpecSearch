@@ -139,6 +139,9 @@ different/latest version. Local imports read only the manifest's unique
 unavailable; invalid registry upstream objects reject that version's import.
 
 Only credential-free HTTP(S) project links without query/fragment are accepted.
+Hosts must be DNS/IDNA names or standard IPv4/IPv6 addresses; escaped authority
+delimiters and ambiguous numeric hosts are rejected. Unicode control, format,
+and surrogate characters are rejected in URLs and revisions.
 Revision is a declaration, not proof of a checkout, ownership, or runtime
 behavior. No upstream fetching, cloning, or execution occurs. Missing metadata
 stays unavailable, not inferred from IDs or archive links. Upstream fields do not

@@ -26,7 +26,8 @@ function upstreamView(value:Upstream|null|undefined, compact=false):HTMLElement{
  const node=el('div','', 'upstream');
  let url:URL;
  try{
-  if(!value||typeof value.url!=='string'||value.url.length>2048||/[\s\x00-\x1f\x7f\\]/.test(value.url)||!/^https?:\/\//i.test(value.url))throw new Error();
+  if(!value||typeof value.url!=='string'||value.url.length>2048||/[\s\p{Cc}\p{Cf}\p{Cs}\\]/u.test(value.url)||!/^https?:\/\//i.test(value.url))throw new Error();
+  if(value.revision!==undefined&&(typeof value.revision!=='string'||!value.revision||value.revision.length>256||/[\s\p{Cc}\p{Cf}\p{Cs}]/u.test(value.revision)))throw new Error();
   url=new URL(value.url);
   if(!url.hostname||url.username||url.password||url.search||url.hash)throw new Error();
  }catch{if(!compact)node.append(el('span','Upstream unavailable','muted'));return node;}
