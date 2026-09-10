@@ -117,6 +117,11 @@ th:first-child { width: 115px; }
 td { font-size: 13px; line-height: 1.6; }
 footer { border-top: 1px solid var(--rule); padding: 18px 32px; display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font: 11px/1.5 var(--mono); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
+.upstream { display: grid; gap: 3px; min-width: 0; margin: 10px 0; font-size: 12px; overflow-wrap: anywhere; }
+.upstream a { display: flex; align-items: baseline; gap: 5px; min-width: 0; }
+.upstream svg { width: 13px; height: 13px; flex: 0 0 13px; }
+.upstream code { white-space: normal; overflow-wrap: anywhere; }
+
 @media (max-width: 760px) {
   header { padding: 14px 16px; align-items: flex-start; gap: 12px; }
   h1 { font-size: 24px; }

@@ -125,6 +125,7 @@ class SearchService:
                     "name": package.name,
                     "summary": package.summary,
                     "license": package.license,
+                    "upstream": package.upstream.model_dump() if package.upstream else None,
                     "source_id": package.source_id,
                     "source": package.source_kind,
                     "metadata_only": package.metadata_only,

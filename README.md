@@ -128,6 +128,34 @@ No LLM reranker, translation, or generative query expansion is included.
 
 ## Checks
 
+### Upstream Project Links
+
+Search results, package details, and comparison expose optional
+`upstream: {url, revision?}` separately from registry `source.url` (the spec
+archive). Registry imports read this from the **exact version**, never from a
+different/latest version. Local imports read only the manifest's unique
+`foreignArtifacts` entry with `id: upstream_repository` and
+`role: primary_intent_source`. Unsafe or ambiguous local declarations remain
+unavailable; invalid registry upstream objects reject that version's import.
+
+Only credential-free HTTP(S) project links without query/fragment are accepted.
+Hosts must be DNS/IDNA names or standard IPv4/IPv6 addresses; escaped authority
+delimiters and ambiguous numeric hosts are rejected. Unicode control, format,
+and surrogate characters are rejected in URLs and revisions.
+Revision is a declaration, not proof of a checkout, ownership, or runtime
+behavior. No upstream fetching, cloning, or execution occurs. Missing metadata
+stays unavailable, not inferred from IDs or archive links. Upstream fields do not
+enter ranking documents or embeddings; this change improves result inspection,
+not measured retrieval quality.
+
+After the SpecPM registry publishes the optional field, re-run `specsearch
+--config <config> import` and `specsearch --config <config> index build`. Existing
+snapshots still load but cannot acquire previously omitted metadata without a
+rebuild. New snapshots are not rollback-compatible with older binaries that
+reject unknown package fields; retain the old snapshot when rolling back. A
+registry metadata change also changes record digests, so recalibrate separately
+before making quality claims about the new corpus.
+
 ```sh
 make check
 npm run test:e2e

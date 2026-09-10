@@ -5,7 +5,9 @@ import json
 from datetime import datetime, timezone
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_serializer, model_validator
+
+from .upstream import normalize_upstream
 
 
 def digest(value) -> str:
@@ -20,6 +22,28 @@ def now() -> str:
 
 class StrictModel(BaseModel):
     model_config = ConfigDict(extra="forbid")
+
+
+class Upstream(StrictModel):
+    url: str
+    revision: str | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def validate_upstream(cls, value):
+        if isinstance(value, cls):
+            return value
+        normalized = normalize_upstream(value)
+        if normalized is None:
+            raise ValueError("invalid_upstream")
+        return normalized
+
+    @model_serializer
+    def serialize(self):
+        value = {"url": self.url}
+        if self.revision is not None:
+            value["revision"] = self.revision
+        return value
 
 
 class FieldText(StrictModel):
@@ -46,6 +70,7 @@ class Package(StrictModel):
     name: str
     summary: str = ""
     license: str | None = None
+    upstream: Upstream | None = None
     digest: str
     capabilities: list[str] = Field(default_factory=list)
     intents: list[str] = Field(default_factory=list)

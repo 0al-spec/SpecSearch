@@ -1,7 +1,8 @@
 import {createElement, Search, X, Check, ExternalLink} from 'lucide';
 
-type Result = {record_id:string;package_id:string;version:string;name:string;summary:string;source:string;source_id:string;metadata_only:boolean;match_strength:string;ranking_score:number|null;snippets:{path:string;text:string}[]};
-type Package = {record_id:string;package_id:string;version:string;name:string;summary:string;source_kind:string;source_id:string;license:string|null;digest:string;details:Record<string,unknown>;evidence:unknown[];provenance:unknown;documents:{fields:{path:string;text:string}[]}[]};
+type Upstream = {url:string;revision?:string};
+type Result = {record_id:string;package_id:string;version:string;name:string;summary:string;source:string;source_id:string;metadata_only:boolean;match_strength:string;ranking_score:number|null;snippets:{path:string;text:string}[];upstream?:Upstream|null};
+type Package = {record_id:string;package_id:string;version:string;name:string;summary:string;source_kind:string;source_id:string;license:string|null;digest:string;details:Record<string,unknown>;evidence:unknown[];provenance:unknown;documents:{fields:{path:string;text:string}[]}[];upstream?:Upstream|null};
 const $ = <T extends HTMLElement = HTMLElement>(id:string) => document.getElementById(id) as T;
 const input = (id:string) => $<HTMLInputElement>(id).value;
 const el = (tag:string, text?:string, className?:string) => {const node=document.createElement(tag);if(text!==undefined)node.textContent=text;if(className)node.className=className;return node;};
@@ -21,6 +22,19 @@ function logo(pid:string){
  if(!key)return el('span','S','brandmark');const img=document.createElement('img');img.src=`/logos/${key}.png`;img.alt='';img.className='avatar';return img;
 }
 function badge(text:string, candidate=false){return el('span',text,'badge'+(candidate?' candidate':''));}
+function upstreamView(value:Upstream|null|undefined, compact=false):HTMLElement{
+ const node=el('div','', 'upstream');
+ let url:URL;
+ try{
+  if(!value||typeof value.url!=='string'||value.url.length>2048||/[\s\p{Cc}\p{Cf}\p{Cs}\\]/u.test(value.url)||!/^https?:\/\//i.test(value.url))throw new Error();
+  if(value.revision!==undefined&&(typeof value.revision!=='string'||!value.revision||value.revision.length>256||/[\s\p{Cc}\p{Cf}\p{Cs}]/u.test(value.revision)))throw new Error();
+  url=new URL(value.url);
+  if(!url.hostname||url.username||url.password||url.search||url.hash)throw new Error();
+ }catch{if(!compact)node.append(el('span','Upstream unavailable','muted'));return node;}
+ const link=document.createElement('a');link.href=url.href;link.target='_blank';link.rel='noopener noreferrer';link.setAttribute('aria-label','Upstream project');link.title=value!.url;link.append(createElement(ExternalLink),document.createTextNode(compact?`${url.host}${url.pathname}`:value!.url));node.append(link);
+ if(!compact&&value!.revision)node.append(el('span','Declared revision','muted'),el('code',value!.revision));
+ return node;
+}
 function renderValue(value:unknown):HTMLElement{
  const node=el('div','', 'field-value');
  if(value===null||value===undefined){node.append(el('span','Not declared','muted'));return node;}
@@ -49,6 +63,7 @@ function renderResults(){
   const heading=el('div','', 'result-heading');heading.append(logo(result.package_id),el('h3',result.name));open.append(heading,el('div',`${result.package_id}@${result.version}`,'identity'),el('p',result.summary));
   open.onclick=()=>showDetail(result.record_id);row.append(open);
   const badges=el('div','', 'badges');badges.append(badge(result.source,result.source==='candidates'),badge(result.match_strength));if(result.metadata_only)badges.append(badge('Metadata only'));row.append(badges);
+  if(result.upstream)row.append(upstreamView(result.upstream,true));
   const bottom=el('div','', 'result-bottom');const label=el('label');const check=document.createElement('input');check.type='checkbox';check.checked=compared.has(result.record_id);check.setAttribute('aria-label',`Compare ${result.package_id}`);
   check.onchange=async()=>{
    const id=result.record_id;
@@ -68,6 +83,7 @@ async function showDetail(id:string){
  try{const p=await loadPackage(id);if(token!==detailToken)return;const detail=$('detail');detail.replaceChildren();
   const heading=el('div','', 'detail-heading');heading.append(logo(p.package_id),el('h2',p.name));detail.append(heading,el('div',`${p.package_id}@${p.version}`,'identity'),el('p',p.summary,'detail-summary'));
   const badges=el('div','', 'badges');badges.append(badge(p.source_kind,p.source_kind==='candidates'),badge(p.license||'License not declared'));detail.append(badges);
+  detail.append(upstreamView(p.upstream));
   const actions=el('div','', 'detail-actions');const verify=el('button','Verify metadata') as HTMLButtonElement;verify.prepend(createElement(Check));const outcome=el('span','','verification');verify.onclick=async()=>{verify.disabled=true;outcome.textContent='Checking';try{const r=await api('/v1/verify',{record_id:id,snapshot});outcome.textContent=r.status;}catch(e){outcome.textContent=String(e);}finally{verify.disabled=false;}};actions.append(verify,outcome);detail.append(actions);
   const result=results.find(r=>r.record_id===id);if(result){const matches=el('section','', 'section');matches.append(el('h3','Matched source fields'));for(const s of result.snippets){const block=el('div','', 'snippet');const link=document.createElement('a');link.href='#source-field';link.textContent=s.path;link.onclick=e=>{e.preventDefault();showField(p,s.path);};block.append(el('p',s.text),link);matches.append(block);}detail.append(matches);}
   const specs=p.details.specs as Record<string,unknown>[]|undefined;
@@ -99,7 +115,7 @@ function comparisonValue(p:Package,key:string):unknown{
  return metadata?.[fields[key]||key];
 }
 $('compare').onclick=()=>{const packages=[...compared.values()].flatMap(slot=>slot.package?[slot.package]:[]);const table=document.createElement('table');const head=el('tr');head.append(el('th',''));for(const p of packages)head.append(el('th',p.name));table.append(head);
- for(const key of ['package_id','version','source_kind','license','intent','provides','interfaces','requires','constraints']){const row=el('tr');row.append(el('th',key));for(const p of packages){const cell=el('td');cell.append(renderValue(comparisonValue(p,key)));row.append(cell);}table.append(row);}
+ for(const key of ['package_id','version','source_kind','upstream','license','intent','provides','interfaces','requires','constraints']){const row=el('tr');row.append(el('th',key));for(const p of packages){const cell=el('td');cell.append(key==='upstream'?upstreamView(p.upstream):renderValue(comparisonValue(p,key)));row.append(cell);}table.append(row);}
  $('comparison-content').replaceChildren(table);$<HTMLDialogElement>('comparison').showModal();};
 $('close-comparison').onclick=()=>$<HTMLDialogElement>('comparison').close();
 void api('/v1/status').then(s=>{$('status').textContent=`${s.packages} packages · ${s.provider?.model||'BM25'} · Local`;}).catch(e=>{$('status').textContent=String(e);});
